@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>일본인 수면 만족도 분석 리포트 | Nightly</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation@3.0.1"></script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;background:#F1F5F9;color:#1E293B;line-height:1.7}
+.report-header{background:linear-gradient(135deg,#312E81 0%,#4F46E5 50%,#6366F1 100%);color:#fff;padding:3rem 1.5rem;text-align:center}
+.report-header h1{font-size:2rem;font-weight:800;margin-bottom:.5rem;letter-spacing:-.02em}
+.report-header .subtitle{font-size:1rem;opacity:.85;font-weight:400}
+.report-header .brand{font-size:.85rem;opacity:.6;margin-top:.75rem}
+.container{max-width:960px;margin:0 auto;padding:1.5rem}
+.section{background:#fff;border-radius:16px;padding:2rem;margin-bottom:1.5rem;box-shadow:0 1px 3px rgba(0,0,0,.06)}
+.section-title{font-size:1.35rem;font-weight:700;margin-bottom:.25rem;color:#312E81}
+.section-desc{color:#64748B;font-size:.9rem;margin-bottom:1.5rem}
+.comparison-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:0;border:1px solid #E2E8F0;border-radius:12px;overflow:hidden;margin-bottom:1rem}
+.comp-header{background:#F8FAFC;padding:.75rem;text-align:center;font-weight:700;font-size:.9rem;border-bottom:1px solid #E2E8F0}
+.comp-header.highlight{background:#EEF2FF;color:#4F46E5}
+.comp-row{display:contents}
+.comp-label{padding:.6rem .75rem;font-weight:600;font-size:.85rem;border-top:1px solid #E2E8F0;background:#F8FAFC;display:flex;align-items:center}
+.comp-cell{padding:.6rem .75rem;text-align:center;font-size:.95rem;border-top:1px solid #E2E8F0;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.comp-cell.highlight{background:#EEF2FF;font-weight:600}
+.comp-value{font-size:1.1rem;font-weight:700}
+.comp-sub{font-size:.75rem;color:#94A3B8;margin-top:2px}
+.countries-note{background:#F8FAFC;border-radius:8px;padding:.75rem 1rem;font-size:.85rem;color:#64748B;margin-top:.5rem}
+.countries-note strong{color:#1E293B}
+.chart-block{margin-bottom:2rem}
+.chart-block:last-child{margin-bottom:0}
+.chart-title{font-size:1.05rem;font-weight:700;margin-bottom:.25rem}
+.chart-wrap{position:relative;margin:1rem 0}
+.insight-box{background:linear-gradient(135deg,#EEF2FF,#E0E7FF);border-radius:10px;padding:.75rem 1rem;font-size:.9rem;color:#312E81;border-left:4px solid #6366F1;margin-top:.75rem}
+.insight-box strong{font-weight:700}
+.rec-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+@media(max-width:640px){.rec-grid{grid-template-columns:1fr}}
+.rec-card{border:1px solid #E2E8F0;border-radius:12px;padding:1.25rem;border-left:4px solid #10B981;transition:box-shadow .2s}
+.rec-card:hover{box-shadow:0 4px 12px rgba(0,0,0,.08)}
+.rec-card.caution{border-left-color:#EF4444}
+.rec-title{font-size:1rem;font-weight:700;margin-bottom:.5rem}
+.rec-evidence{font-size:.85rem;color:#64748B;margin-bottom:.5rem}
+.rec-evidence .num{color:#4F46E5;font-weight:700}
+.rec-action{font-size:.85rem;background:#F0FDF4;border-radius:6px;padding:.5rem .75rem;color:#166534}
+.rec-card.caution .rec-action{background:#FEF2F2;color:#991B1B}
+.comparison-summary{display:grid;grid-template-columns:repeat(4,1fr);gap:.75rem;margin-bottom:1.5rem}
+@media(max-width:640px){.comparison-summary{grid-template-columns:repeat(2,1fr)}}
+.summary-card{text-align:center;padding:1rem;border-radius:10px;background:#F8FAFC}
+.summary-card .label{font-size:.75rem;color:#64748B;margin-bottom:.25rem}
+.summary-card .value{font-size:1.5rem;font-weight:800;color:#312E81}
+.summary-card .diff{font-size:.8rem;color:#EF4444;margin-top:.15rem}
+footer{text-align:center;padding:2rem;color:#94A3B8;font-size:.8rem}
+.sub-section-note{font-size:.82rem;color:#94A3B8;margin-bottom:.5rem}
+@media(max-width:640px){
+  .comparison-grid{grid-template-columns:auto 1fr 1fr 1fr;font-size:.85rem}
+  .report-header h1{font-size:1.5rem}
+  .section{padding:1.25rem}
+}
+</style>
+</head>
+<body>
+
+<header class="report-header">
+  <h1>일본인 수면 만족도 분석</h1>
+  <p class="subtitle">Nightly 수면 데이터 301만 건 분석 &middot; 2024.11 ~ 2026.02</p>
+  <p class="brand">Nightly &mdash; 잠이 달라지는 경험</p>
+</header>
+
+<main class="container">
+
+<!-- ===== SECTION 1: 전체 vs 일본 비교 ===== -->
+<div class="section">
+  <h2 class="section-title">1. 나이틀리 전체 평균 vs 일본인 평균</h2>
+  <p class="section-desc">일본인은 가장 일찍 잠들지만, 가장 일찍 일어나 수면 시간이 가장 짧고 만족도도 가장 낮습니다.</p>
+
+  <div class="comparison-summary">
+    <div class="summary-card">
+      <div class="label">일본인 평균 수면</div>
+      <div class="value">6h 19m</div>
+      <div class="diff">전체 대비 -7분</div>
+    </div>
+    <div class="summary-card">
+      <div class="label">일본인 평균 취침</div>
+      <div class="value">1:04</div>
+      <div class="diff">전체 대비 -16분</div>
+    </div>
+    <div class="summary-card">
+      <div class="label">일본인 평균 기상</div>
+      <div class="value">7:19</div>
+      <div class="diff">전체 대비 -24분</div>
+    </div>
+    <div class="summary-card">
+      <div class="label">일본인 수면 만족도</div>
+      <div class="value">3.33</div>
+      <div class="diff">전체 대비 -0.15점</div>
+    </div>
+  </div>
+
+  <table style="width:100%;border-collapse:collapse;border-radius:12px;overflow:hidden;border:1px solid #E2E8F0;font-size:.92rem">
+    <thead>
+      <tr style="background:#F8FAFC">
+        <th style="padding:.7rem;text-align:left;border-bottom:1px solid #E2E8F0;width:20%"></th>
+        <th style="padding:.7rem;text-align:center;border-bottom:1px solid #E2E8F0;width:26%">나이틀리 전체</th>
+        <th style="padding:.7rem;text-align:center;border-bottom:1px solid #E2E8F0;width:27%;background:#EEF2FF;color:#4F46E5;font-weight:700">일본</th>
+        <th style="padding:.7rem;text-align:center;border-bottom:1px solid #E2E8F0;width:27%">한국</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td style="padding:.6rem .7rem;font-weight:600;border-bottom:1px solid #F1F5F9">수면 시간</td>
+        <td style="padding:.6rem;text-align:center;border-bottom:1px solid #F1F5F9"><strong>6시간 26분</strong></td>
+        <td style="padding:.6rem;text-align:center;border-bottom:1px solid #F1F5F9;background:#FAFAFE"><strong style="color:#4F46E5">6시간 19분</strong></td>
+        <td style="padding:.6rem;text-align:center;border-bottom:1px solid #F1F5F9"><strong>6시간 32분</strong></td>
+      </tr>
+      <tr>
+        <td style="padding:.6rem .7rem;font-weight:600;border-bottom:1px solid #F1F5F9">취침 시각</td>
+        <td style="padding:.6rem;text-align:center;border-bottom:1px solid #F1F5F9">오전 1:20</td>
+        <td style="padding:.6rem;text-align:center;border-bottom:1px solid #F1F5F9;background:#FAFAFE"><strong style="color:#4F46E5">오전 1:04</strong></td>
+        <td style="padding:.6rem;text-align:center;border-bottom:1px solid #F1F5F9">오전 1:34</td>
+      </tr>
+      <tr>
+        <td style="padding:.6rem .7rem;font-weight:600;border-bottom:1px solid #F1F5F9">기상 시각</td>
+        <td style="padding:.6rem;text-align:center;border-bottom:1px solid #F1F5F9">오전 7:43</td>
+        <td style="padding:.6rem;text-align:center;border-bottom:1px solid #F1F5F9;background:#FAFAFE"><strong style="color:#4F46E5">오전 7:19</strong></td>
+        <td style="padding:.6rem;text-align:center;border-bottom:1px solid #F1F5F9">오전 8:03</td>
+      </tr>
+      <tr>
+        <td style="padding:.6rem .7rem;font-weight:600">수면 만족도</td>
+        <td style="padding:.6rem;text-align:center"><strong>3.48</strong>/5</td>
+        <td style="padding:.6rem;text-align:center;background:#FAFAFE"><strong style="color:#4F46E5">3.33</strong>/5</td>
+        <td style="padding:.6rem;text-align:center"><strong>3.60</strong>/5</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="countries-note">
+    <strong>포함 국가:</strong> 일본(134만 건, 44.5%), 한국(160만 건, 53.1%), 미국, 영국, 대만, 중국 등 기타(7.2만 건, 2.4%)
+  </div>
+
+  <div class="insight-box" style="margin-top:1rem">
+    <strong>핵심 요약:</strong> 한국인은 가장 늦게 자지만 가장 오래 자고 만족도도 가장 높습니다.
+    일본인은 상대적으로 일찍 잠들지만 일찍 일어나야 하는 생활 패턴으로 인해 수면 시간이 가장 짧고, 수면 만족도도 3개 그룹 중 가장 낮습니다.
+  </div>
+</div>
+
+<!-- ===== SECTION 2: 수면과 만족도의 관계 ===== -->
+<div class="section">
+  <h2 class="section-title">2. 수면과 수면 만족도의 관계</h2>
+  <p class="section-desc">일본인 수면 데이터 134만 건을 분석하여, 수면 만족도에 영향을 미치는 요인을 살펴봅니다. 만족도는 기상 직후 사용자가 직접 평가한 1~5점 척도입니다.</p>
+
+  <!-- 2-1. 수면 시간 vs 만족도 -->
+  <div class="chart-block">
+    <h3 class="chart-title">2-1. 수면 시간에 따른 만족도</h3>
+    <p class="sub-section-note">수면 시간대별 평균 만족도 (일본인 78.7만 건, rating 응답자)</p>
+    <div class="chart-wrap"><canvas id="chartDur"></canvas></div>
+    <div class="insight-box">
+      <strong>7시간이 분기점.</strong> 6.5시간(3.33) → 7시간(3.41)에서 만족도가 <strong>+0.08점 급상승</strong>합니다. 이 구간의 증가폭은 전체 평균 증가폭(0.04/30분)의 2배입니다. 일본인 평균(6시간 19분)에서 <strong>41분만 더 자면</strong> 만족도가 확 달라집니다.
+    </div>
+  </div>
+
+  <!-- 2-2. 취침 시각 vs 만족도 -->
+  <div class="chart-block">
+    <h3 class="chart-title">2-2. 취침 시각에 따른 만족도</h3>
+    <p class="sub-section-note">취침 시각대별 평균 만족도 (20시~6시)</p>
+    <div class="chart-wrap"><canvas id="chartBed"></canvas></div>
+    <div class="insight-box">
+      <strong>21~22시 취침이 가장 좋습니다.</strong> 21시(3.43) → 0시(3.34) → 3시(3.26)로, 취침이 늦어질수록 만족도가 일관되게 하락합니다. 일본인 평균 취침 시각(1:04)에서 <strong>1시간만 앞당기면</strong> 만족도가 +0.10점 이상 개선됩니다.
+    </div>
+  </div>
+
+  <!-- 2-3. 기상 시각 vs 만족도 -->
+  <div class="chart-block">
+    <h3 class="chart-title">2-3. 기상 시각에 따른 만족도</h3>
+    <p class="sub-section-note">기상 시각대별 평균 만족도 (4시~13시)</p>
+    <div class="chart-wrap"><canvas id="chartWake"></canvas></div>
+    <div class="insight-box">
+      <strong>충분히 자고 일어나는 것이 핵심.</strong> 기상 시각 자체보다는 <strong>총 수면 시간이 충분한지</strong>가 만족도를 결정합니다. 8시 이후 기상자(3.38+)는 5~7시 기상자(3.27~3.31)보다 만족도가 높지만, 이는 충분한 수면의 결과입니다.
+    </div>
+  </div>
+
+  <!-- 2-4. 수면 전 활동 vs 만족도 -->
+  <div class="chart-block">
+    <h3 class="chart-title">2-4. 수면 전 활동에 따른 만족도</h3>
+    <p class="sub-section-note">취침 전 활동별 평균 만족도 (일본인 평균 3.33 기준)</p>
+    <div class="chart-wrap" style="height:420px"><canvas id="chartActivity"></canvas></div>
+    <div class="insight-box">
+      <strong>운동과 산책이 만족도 1위.</strong> 운동(3.48)과 산책(3.47)은 평균 대비 +0.14~0.15점 높습니다.
+      반면 <strong>음주(3.23)와 흡연(3.23)</strong>은 만족도가 가장 낮습니다. 특히 음주는 수면 시간을 +9분 늘리지만 만족도는 오히려 떨어지는 역설적 결과를 보입니다.
+    </div>
+  </div>
+
+  <!-- 2-5. 수면 전 감정 vs 만족도 -->
+  <div class="chart-block">
+    <h3 class="chart-title">2-5. 수면 전 감정에 따른 만족도</h3>
+    <p class="sub-section-note">취침 전 감정 상태별 평균 만족도</p>
+    <div class="chart-wrap" style="height:340px"><canvas id="chartMood"></canvas></div>
+    <div class="insight-box">
+      <strong>행복한 밤 vs 우울한 밤, 0.40점 차이.</strong> 행복(3.55)한 기분으로 잠든 사람은 우울(3.14)한 기분으로 잠든 사람보다 다음 날 만족도가 <strong>0.40점이나 높습니다</strong>. 이는 수면 시간 2시간 차이에 해당하는 효과입니다.
+    </div>
+  </div>
+</div>
+
+<!-- ===== SECTION 3: 만족도를 높이는 방법 ===== -->
+<div class="section">
+  <h2 class="section-title">3. 수면 만족도를 높이는 방법</h2>
+  <p class="section-desc">134만 건의 데이터가 말하는, 오늘 밤부터 실천할 수 있는 수면 만족도 향상법</p>
+
+  <div class="rec-grid">
+    <div class="rec-card">
+      <div class="rec-title">7시간 이상 자세요</div>
+      <div class="rec-evidence">
+        7시간 수면자 만족도 <span class="num">3.41</span> vs 6시간대 <span class="num">3.29</span> → <span class="num">+0.12점</span>
+      </div>
+      <div class="rec-action">현재 일본인 평균 6시간 19분. 취침을 41분만 앞당겨 보세요. 7시간부터 만족도가 급상승합니다.</div>
+    </div>
+
+    <div class="rec-card">
+      <div class="rec-title">밤 11시(23시) 이전에 잠들어 보세요</div>
+      <div class="rec-evidence">
+        22시 취침 <span class="num">3.42</span> vs 0시 이후 <span class="num">3.30</span> → <span class="num">+0.12점</span>
+      </div>
+      <div class="rec-action">취침 시각이 1시간 늦어질 때마다 만족도가 약 0.05점씩 떨어집니다. 일본인 평균(1:04)에서 1시간만 앞당겨 보세요.</div>
+    </div>
+
+    <div class="rec-card">
+      <div class="rec-title">저녁에 가벼운 운동이나 산책을 해보세요</div>
+      <div class="rec-evidence">
+        운동 <span class="num">3.48</span> / 산책 <span class="num">3.47</span> — 수면 전 활동 중 만족도 <span class="num">1위</span>
+      </div>
+      <div class="rec-action">20~30분의 가벼운 운동이나 산책이면 충분합니다. 산책자의 수면 시간은 평균보다 +4분 길고, 운동자의 만족도는 +0.15점 높습니다.</div>
+    </div>
+
+    <div class="rec-card">
+      <div class="rec-title">스트레칭이나 저널링으로 하루를 마무리해보세요</div>
+      <div class="rec-evidence">
+        스트레칭 <span class="num">3.41</span> / 저널링 <span class="num">3.41</span> — 평균 대비 <span class="num">+0.08점</span>
+      </div>
+      <div class="rec-action">취침 전 5~10분의 스트레칭이나 감사 일기 쓰기가 수면 만족도를 높여줍니다. 독서(3.40)도 좋은 선택입니다.</div>
+    </div>
+
+    <div class="rec-card caution">
+      <div class="rec-title">취침 전 음주와 흡연을 줄여보세요</div>
+      <div class="rec-evidence">
+        음주 <span class="num">3.23</span> / 흡연 <span class="num">3.23</span> — 평균 대비 <span class="num">-0.10점</span>
+      </div>
+      <div class="rec-action">음주는 수면 시간을 +9분 늘리지만 만족도는 오히려 낮춥니다. 흡연은 수면 시간 -5분, 만족도 -0.10점. 주 3일만 줄여보세요.</div>
+    </div>
+
+    <div class="rec-card caution">
+      <div class="rec-title">오후 2시 이후 카페인을 중단해보세요</div>
+      <div class="rec-evidence">
+        카페인 섭취자 만족도 <span class="num">3.29</span>, 수면 시간 <span class="num">-14분</span>
+      </div>
+      <div class="rec-action">카페인 섭취자는 평균보다 수면이 14분 짧고 만족도도 -0.04점 낮습니다. 오후 카페인 차단이 효과적입니다.</div>
+    </div>
+
+    <div class="rec-card">
+      <div class="rec-title">긍정적인 마음으로 잠들어 보세요</div>
+      <div class="rec-evidence">
+        행복한 밤 <span class="num">3.55</span> vs 우울한 밤 <span class="num">3.14</span> → 차이 <span class="num">0.40점</span>
+      </div>
+      <div class="rec-action">감정 상태가 수면 만족도에 미치는 영향은 수면 시간 2시간 차이와 동일합니다. 취침 전 감사한 일 3가지를 떠올려 보세요.</div>
+    </div>
+  </div>
+
+  <div class="insight-box" style="margin-top:1.5rem">
+    <strong>가장 효과적인 조합:</strong> 22시 이전 취침 + 7시간 이상 수면 + 저녁 산책/운동 + 긍정적 감정 → 예상 만족도 <strong>3.6점 이상</strong> (현재 일본 평균 3.33 대비 +0.27점)
+  </div>
+</div>
+
+</main>
+
+<footer>
+  <p>Nightly 수면 데이터 리포트 | 분석 기간: 2024.11 ~ 2026.02 | 일본인 사용자 181,407명, 1,340,830건</p>
+  <p style="margin-top:.25rem">&copy; 2026 Nightly. All rights reserved.</p>
+</footer>
+
+<script>
+const AVG = 3.33;
+const GREEN = '#10B981';
+const RED = '#EF4444';
+const AMBER = '#F59E0B';
+const INDIGO = '#6366F1';
+const LIGHT_GREEN = 'rgba(16,185,129,0.7)';
+const LIGHT_RED = 'rgba(239,68,68,0.65)';
+const LIGHT_AMBER = 'rgba(245,158,11,0.65)';
+
+function ratingColors(values, threshold) {
+  return values.map(v => v >= threshold ? LIGHT_GREEN : LIGHT_RED);
+}
+
+const annotationLine = (value, label) => ({
+  type: 'line',
+  yMin: value,
+  yMax: value,
+  borderColor: 'rgba(99,102,241,0.5)',
+  borderWidth: 1.5,
+  borderDash: [6, 4],
+  label: {
+    display: true,
+    content: label,
+    position: 'end',
+    backgroundColor: 'rgba(99,102,241,0.8)',
+    color: '#fff',
+    font: { size: 11 },
+    padding: 4,
+    borderRadius: 4
+  }
+});
+
+const annotationLineX = (value, label) => ({
+  type: 'line',
+  xMin: value,
+  xMax: value,
+  borderColor: 'rgba(99,102,241,0.5)',
+  borderWidth: 1.5,
+  borderDash: [6, 4],
+  label: {
+    display: true,
+    content: label,
+    position: 'start',
+    backgroundColor: 'rgba(99,102,241,0.8)',
+    color: '#fff',
+    font: { size: 11 },
+    padding: 4,
+    borderRadius: 4
+  }
+});
+
+// ===== Chart 1: Duration vs Rating =====
+const durLabels = ['3h','3.5h','4h','4.5h','5h','5.5h','6h','6.5h','7h','7.5h','8h','8.5h','9h','9.5h','10h'];
+const durRatings = [3.072,3.099,3.102,3.137,3.197,3.234,3.290,3.334,3.413,3.459,3.519,3.558,3.596,3.601,3.644];
+const durCounts = [7925,10228,24823,47844,66798,83386,107335,106253,102877,79502,55059,31140,19096,9909,5867];
+
+new Chart(document.getElementById('chartDur'), {
+  type: 'bar',
+  data: {
+    labels: durLabels,
+    datasets: [{
+      label: '평균 만족도',
+      data: durRatings,
+      backgroundColor: durRatings.map(v => v >= AVG ? LIGHT_GREEN : v >= 3.2 ? LIGHT_AMBER : LIGHT_RED),
+      borderRadius: 4,
+      borderSkipped: false
+    }]
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: true,
+    aspectRatio: 2.2,
+    scales: {
+      y: {
+        min: 3.0,
+        max: 3.7,
+        title: { display: true, text: '만족도', font: { size: 12 } },
+        grid: { color: 'rgba(0,0,0,0.05)' }
+      },
+      x: {
+        title: { display: true, text: '수면 시간', font: { size: 12 } },
+        grid: { display: false }
+      }
+    },
+    plugins: {
+      legend: { display: false },
+      tooltip: {
+        callbacks: {
+          afterLabel: (ctx) => `응답 수: ${durCounts[ctx.dataIndex].toLocaleString()}건`
+        }
+      },
+      annotation: {
+        annotations: {
+          avgLine: annotationLine(AVG, '일본 평균 3.33'),
+          sevenBox: {
+            type: 'box',
+            xMin: 7.5,
+            xMax: 8.5,
+            backgroundColor: 'rgba(16,185,129,0.08)',
+            borderColor: 'transparent',
+            label: {
+              display: true,
+              content: '7시간 분기점',
+              position: { x: 'center', y: 'start' },
+              color: '#10B981',
+              font: { size: 11, weight: 'bold' }
+            }
+          }
+        }
+      }
+    }
+  }
+});
+
+// ===== Chart 2: Bedtime vs Rating =====
+const bedLabels = ['20시','21시','22시','23시','0시','1시','2시','3시','4시','5시','6시'];
+const bedRatings = [3.395,3.432,3.421,3.398,3.341,3.302,3.275,3.261,3.262,3.280,3.275];
+const bedCounts = [5101,20527,70524,139619,175292,150086,98038,54259,28843,15308,8247];
+
+new Chart(document.getElementById('chartBed'), {
+  type: 'bar',
+  data: {
+    labels: bedLabels,
+    datasets: [{
+      label: '평균 만족도',
+      data: bedRatings,
+      backgroundColor: bedRatings.map(v => v >= 3.40 ? LIGHT_GREEN : v >= AVG ? LIGHT_AMBER : LIGHT_RED),
+      borderRadius: 4,
+      borderSkipped: false
+    }]
+  },
+  options: {
+    responsive: true,
+    aspectRatio: 2.2,
+    scales: {
+      y: {
+        min: 3.2,
+        max: 3.5,
+        title: { display: true, text: '만족도', font: { size: 12 } },
+        grid: { color: 'rgba(0,0,0,0.05)' }
+      },
+      x: {
+        title: { display: true, text: '취침 시각', font: { size: 12 } },
+        grid: { display: false }
+      }
+    },
+    plugins: {
+      legend: { display: false },
+      tooltip: {
+        callbacks: {
+          afterLabel: (ctx) => `응답 수: ${bedCounts[ctx.dataIndex].toLocaleString()}건`
+        }
+      },
+      annotation: {
+        annotations: {
+          avgLine: annotationLine(AVG, '일본 평균 3.33')
+        }
+      }
+    }
+  }
+});
+
+// ===== Chart 3: Wake vs Rating =====
+const wakeLabels = ['4시','5시','6시','7시','8시','9시','10시','11시','12시','13시'];
+const wakeRatings = [3.226,3.267,3.304,3.310,3.382,3.446,3.477,3.481,3.485,3.449];
+const wakeCounts = [22757,91818,219168,190351,98139,59514,36119,19286,12820,6816];
+
+new Chart(document.getElementById('chartWake'), {
+  type: 'bar',
+  data: {
+    labels: wakeLabels,
+    datasets: [{
+      label: '평균 만족도',
+      data: wakeRatings,
+      backgroundColor: wakeRatings.map(v => v >= 3.40 ? LIGHT_GREEN : v >= AVG ? LIGHT_AMBER : LIGHT_RED),
+      borderRadius: 4,
+      borderSkipped: false
+    }]
+  },
+  options: {
+    responsive: true,
+    aspectRatio: 2.2,
+    scales: {
+      y: {
+        min: 3.15,
+        max: 3.55,
+        title: { display: true, text: '만족도', font: { size: 12 } },
+        grid: { color: 'rgba(0,0,0,0.05)' }
+      },
+      x: {
+        title: { display: true, text: '기상 시각', font: { size: 12 } },
+        grid: { display: false }
+      }
+    },
+    plugins: {
+      legend: { display: false },
+      tooltip: {
+        callbacks: {
+          afterLabel: (ctx) => `응답 수: ${wakeCounts[ctx.dataIndex].toLocaleString()}건`
+        }
+      },
+      annotation: {
+        annotations: {
+          avgLine: annotationLine(AVG, '일본 평균 3.33')
+        }
+      }
+    }
+  }
+});
+
+// ===== Chart 4: Activity vs Rating =====
+const actData = [
+  { name: '운동', rating: 3.476, count: 64646 },
+  { name: '산책', rating: 3.469, count: 28963 },
+  { name: '스트레칭', rating: 3.413, count: 84025 },
+  { name: '저널링', rating: 3.412, count: 24754 },
+  { name: '독서', rating: 3.397, count: 30205 },
+  { name: '게임', rating: 3.388, count: 291979 },
+  { name: '낮잠', rating: 3.356, count: 32875 },
+  { name: '샤워/입욕', rating: 3.354, count: 323949 },
+  { name: '야식', rating: 3.353, count: 225931 },
+  { name: '공부/업무', rating: 3.349, count: 154959 },
+  { name: '스마트폰', rating: 3.335, count: 1030150 },
+  { name: 'TV 시청', rating: 3.313, count: 241266 },
+  { name: '카페인', rating: 3.292, count: 25391 },
+  { name: '음주', rating: 3.231, count: 84149 },
+  { name: '흡연', rating: 3.228, count: 204290 }
+];
+
+new Chart(document.getElementById('chartActivity'), {
+  type: 'bar',
+  data: {
+    labels: actData.map(d => d.name),
+    datasets: [{
+      label: '평균 만족도',
+      data: actData.map(d => d.rating),
+      backgroundColor: actData.map(d => d.rating >= AVG ? LIGHT_GREEN : LIGHT_RED),
+      borderRadius: 4,
+      borderSkipped: false
+    }]
+  },
+  options: {
+    indexAxis: 'y',
+    responsive: true,
+    maintainAspectRatio: false,
+    scales: {
+      x: {
+        min: 3.15,
+        max: 3.55,
+        title: { display: true, text: '만족도', font: { size: 12 } },
+        grid: { color: 'rgba(0,0,0,0.05)' }
+      },
+      y: {
+        grid: { display: false }
+      }
+    },
+    plugins: {
+      legend: { display: false },
+      tooltip: {
+        callbacks: {
+          afterLabel: (ctx) => `기록 수: ${actData[ctx.dataIndex].count.toLocaleString()}건`
+        }
+      },
+      annotation: {
+        annotations: {
+          avgLine: annotationLineX(AVG, '평균 3.33')
+        }
+      }
+    }
+  }
+});
+
+// ===== Chart 5: Mood vs Rating =====
+const moodData = [
+  { name: '행복', rating: 3.546, count: 226549 },
+  { name: '기쁨', rating: 3.543, count: 201743 },
+  { name: '만족', rating: 3.527, count: 338208 },
+  { name: '설렘', rating: 3.499, count: 369730 },
+  { name: '편안', rating: 3.433, count: 504183 },
+  { name: '긴장', rating: 3.247, count: 205741 },
+  { name: '불안', rating: 3.222, count: 331562 },
+  { name: '슬픔', rating: 3.216, count: 144097 },
+  { name: '스트레스', rating: 3.203, count: 418725 },
+  { name: '우울', rating: 3.142, count: 295165 }
+];
+
+new Chart(document.getElementById('chartMood'), {
+  type: 'bar',
+  data: {
+    labels: moodData.map(d => d.name),
+    datasets: [{
+      label: '평균 만족도',
+      data: moodData.map(d => d.rating),
+      backgroundColor: moodData.map(d => d.rating >= AVG ? 'rgba(16,185,129,0.65)' : 'rgba(99,102,241,0.55)'),
+      borderRadius: 4,
+      borderSkipped: false
+    }]
+  },
+  options: {
+    indexAxis: 'y',
+    responsive: true,
+    maintainAspectRatio: false,
+    scales: {
+      x: {
+        min: 3.05,
+        max: 3.65,
+        title: { display: true, text: '만족도', font: { size: 12 } },
+        grid: { color: 'rgba(0,0,0,0.05)' }
+      },
+      y: {
+        grid: { display: false }
+      }
+    },
+    plugins: {
+      legend: { display: false },
+      tooltip: {
+        callbacks: {
+          afterLabel: (ctx) => `기록 수: ${moodData[ctx.dataIndex].count.toLocaleString()}건`
+        }
+      },
+      annotation: {
+        annotations: {
+          avgLine: annotationLineX(AVG, '평균 3.33')
+        }
+      }
+    }
+  }
+});
+</script>
+</body>
+</html>
