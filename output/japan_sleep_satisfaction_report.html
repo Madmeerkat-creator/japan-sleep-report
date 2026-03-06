@@ -199,6 +199,39 @@ footer{text-align:center;padding:2rem;color:#94A3B8;font-size:.8rem}
       <strong>행복한 밤 vs 우울한 밤, 0.40점 차이.</strong> 행복(3.55)한 기분으로 잠든 사람은 우울(3.14)한 기분으로 잠든 사람보다 다음 날 만족도가 <strong>0.40점이나 높습니다</strong>. 이는 수면 시간 2시간 차이에 해당하는 효과입니다.
     </div>
   </div>
+
+  <!-- 2-6. 주중 vs 주말 수면 패턴 -->
+  <div class="chart-block">
+    <h3 class="chart-title">2-6. 주중 vs 주말 수면 시간 및 만족도</h3>
+    <p class="sub-section-note">요일별 평균 수면 시간과 만족도 (일본인 전체)</p>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:.75rem;margin-bottom:1rem">
+      <div style="text-align:center;padding:1rem;background:#F8FAFC;border-radius:10px">
+        <div style="font-size:.75rem;color:#64748B">주중 평균 (월~금)</div>
+        <div style="font-size:1.4rem;font-weight:800;color:#6366F1">6h 15m</div>
+        <div style="font-size:.85rem;color:#64748B">만족도 3.31</div>
+      </div>
+      <div style="text-align:center;padding:1rem;background:#F0FDF4;border-radius:10px">
+        <div style="font-size:.75rem;color:#64748B">주말 평균 (토~일)</div>
+        <div style="font-size:1.4rem;font-weight:800;color:#10B981">6h 31m</div>
+        <div style="font-size:.85rem;color:#166534">만족도 3.41</div>
+      </div>
+      <div style="text-align:center;padding:1rem;background:#EEF2FF;border-radius:10px">
+        <div style="font-size:.75rem;color:#64748B">주말 보상 수면</div>
+        <div style="font-size:1.4rem;font-weight:800;color:#312E81">+16분</div>
+        <div style="font-size:.85rem;color:#4F46E5">만족도 +0.10점</div>
+      </div>
+    </div>
+
+    <div class="chart-wrap"><canvas id="chartWeekday"></canvas></div>
+    <div class="insight-box">
+      <strong>주말에 16분 더 자고, 만족도도 0.10점 높습니다.</strong>
+      주중에는 평균 6시간 15분을 자지만, 주말에는 6시간 31분으로 16분 보상 수면이 발생합니다.
+      특히 <strong>일요일(6h32m, 3.43)</strong>이 한 주 중 수면 시간과 만족도 모두 가장 높고,
+      <strong>목요일(6h14m, 3.31)</strong>이 가장 낮습니다.
+      주중 수면 부족이 만성화되고 있다는 신호입니다.
+    </div>
+  </div>
 </div>
 
 <!-- ===== SECTION 3: 만족도를 높이는 방법 ===== -->
@@ -600,6 +633,106 @@ new Chart(document.getElementById('chartMood'), {
       annotation: {
         annotations: {
           avgLine: annotationLineX(AVG, '평균 3.33')
+        }
+      }
+    }
+  }
+});
+
+// ===== Chart 6: Weekday Pattern (dual axis) =====
+const weekLabels = ['월', '화', '수', '목', '금', '토', '일'];
+const weekDurations = [6.265, 6.240, 6.283, 6.235, 6.237, 6.495, 6.546];
+const weekRatings = [3.317, 3.304, 3.309, 3.307, 3.310, 3.403, 3.425];
+const weekCounts = [186359, 203883, 202585, 209570, 215749, 167633, 155051];
+
+new Chart(document.getElementById('chartWeekday'), {
+  type: 'bar',
+  data: {
+    labels: weekLabels,
+    datasets: [
+      {
+        label: '수면 시간 (h)',
+        data: weekDurations,
+        backgroundColor: weekDurations.map((v, i) => i >= 5 ? 'rgba(16,185,129,0.65)' : 'rgba(99,102,241,0.55)'),
+        borderRadius: 4,
+        borderSkipped: false,
+        yAxisID: 'yDur',
+        order: 2
+      },
+      {
+        label: '만족도',
+        data: weekRatings,
+        type: 'line',
+        borderColor: '#F59E0B',
+        backgroundColor: 'rgba(245,158,11,0.1)',
+        pointBackgroundColor: weekRatings.map((v, i) => i >= 5 ? '#10B981' : '#F59E0B'),
+        pointRadius: 5,
+        pointHoverRadius: 7,
+        borderWidth: 2.5,
+        tension: 0.3,
+        fill: false,
+        yAxisID: 'yRat',
+        order: 1
+      }
+    ]
+  },
+  options: {
+    responsive: true,
+    aspectRatio: 2.2,
+    scales: {
+      yDur: {
+        position: 'left',
+        min: 6.0,
+        max: 6.7,
+        title: { display: true, text: '수면 시간 (h)', font: { size: 12 } },
+        grid: { color: 'rgba(0,0,0,0.05)' },
+        ticks: {
+          callback: v => v.toFixed(1) + 'h'
+        }
+      },
+      yRat: {
+        position: 'right',
+        min: 3.25,
+        max: 3.45,
+        title: { display: true, text: '만족도', font: { size: 12 }, color: '#F59E0B' },
+        grid: { display: false },
+        ticks: { color: '#F59E0B' }
+      },
+      x: {
+        grid: { display: false }
+      }
+    },
+    plugins: {
+      legend: {
+        display: true,
+        position: 'top',
+        labels: { usePointStyle: true, padding: 16, font: { size: 12 } }
+      },
+      tooltip: {
+        callbacks: {
+          afterLabel: (ctx) => {
+            if (ctx.datasetIndex === 0) return `기록 수: ${weekCounts[ctx.dataIndex].toLocaleString()}건`;
+            return '';
+          }
+        }
+      },
+      annotation: {
+        annotations: {
+          weekendBox: {
+            type: 'box',
+            xMin: 4.5,
+            xMax: 6.5,
+            backgroundColor: 'rgba(16,185,129,0.05)',
+            borderColor: 'rgba(16,185,129,0.2)',
+            borderWidth: 1,
+            label: {
+              display: true,
+              content: '주말',
+              position: { x: 'center', y: 'start' },
+              color: '#10B981',
+              font: { size: 11, weight: 'bold' }
+            }
+          }
         }
       }
     }
