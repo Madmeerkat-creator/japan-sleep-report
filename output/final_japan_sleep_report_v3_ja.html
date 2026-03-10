@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="ja">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>일본인 수면 만족도 분석 리포트 v3 | Renight</title>
+<title>日本人の睡眠満足度分析レポート v3 | Renight</title>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0"></script>
 <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation@3.0.1"></script>
 <style>
@@ -112,279 +112,279 @@ footer{text-align:center;padding:2rem;color:#7A7A7A;font-size:.8rem}
 <body>
 
 <header class="report-header">
-  <h1>일본인 수면 만족도 분석</h1>
-  <p class="subtitle">Renight 수면 데이터 분석 &middot; 2025.02 ~ 2026.02</p>
-  <p class="brand">Renight &mdash; 밤을 회복의 시간으로</p>
+  <h1>日本人の睡眠満足度分析</h1>
+  <p class="subtitle">リナイト 睡眠データ分析 &middot; 2025.02 ~ 2026.02</p>
+  <p class="brand">リナイト &mdash; 夜を回復の時間に</p>
 </header>
 
 <main class="container">
 
-<!-- ===== 도입부 ===== -->
+<!-- ===== 導入部 ===== -->
 <div class="intro-section">
-  <h2>이 리포트에 대해</h2>
-  <h3>Renight 소개</h3>
-  <p>Renight은 AI와 뇌과학을 기반으로 한 초개인맞춤형 수면 솔루션입니다. 사용자의 하루 상태, 생활 패턴, 수면 중 데이터를 종합 분석하여 매일 밤 최적화된 수면 환경을 제공하는 구독형 수면 앱 서비스입니다.</p>
-  <div class="slogan">Renight은 단순히 잠을 돕는 것이 아니라,<br>밤을 회복의 시간으로 다시 정의합니다.<br>당신의 잠을 새로운 출발로 바꿉니다.</div>
+  <h2>本レポートについて</h2>
+  <h3>リナイトとは</h3>
+  <p>リナイトは、AIと脳科学に基づく超パーソナライズド睡眠ソリューションです。ユーザーの日々のコンディション、生活パターン、睡眠中のデータを総合的に分析し、毎晩最適な睡眠環境を届けるサブスクリプション型の睡眠アプリです。</p>
+  <div class="slogan">リナイトは、睡眠をサポートするだけのアプリではありません。<br>夜を、回復の時間として見直します。<br>あなたの眠りを、明日の良いスタートへ。</div>
   <div class="highlights">
-    <span>전 세계 유저 160만</span>
-    <span>일본 앱스토어 헬스케어 1위</span>
-    <span>151개국 오늘의 앱 선정</span>
-    <span>깊은 수면 2배 상승 검증</span>
+    <span>世界160万人のユーザー</span>
+    <span>日本App Storeヘルスケア1位</span>
+    <span>151カ国で「今日のApp」に選出</span>
+    <span>深い睡眠2倍の向上を実証</span>
   </div>
-  <h3>리포트 목적</h3>
-  <p>이 리포트는 Renight에 축적된 실제 수면 데이터를 분석한 결과입니다. 설문이 아닌 매일 밤 기록된 실측 데이터를 기반으로, 일본인 사용자의 수면 현실을 객관적으로 조명합니다.</p>
-  <p>수면 시간, 취침·기상 시각, 수면 전 활동과 감정 — 이 네 가지 축을 중심으로 '잘 잤다'는 것이 어떤 조건에서 만들어지는지, 데이터가 말하는 답을 정리했습니다.</p>
-  <h3>분석 개요</h3>
+  <h3>レポートの目的</h3>
+  <p>本レポートは、リナイトに蓄積された実際の睡眠データを分析した結果をまとめたものです。アンケートではなく、毎晩記録された実測データをもとに、日本人ユーザーの睡眠の実態を客観的に明らかにしています。</p>
+  <p>睡眠時間、就寝・起床時刻、就寝前の活動と感情 ── この4つの軸を中心に、「よく眠れた」と感じる条件とは何か、データが示す答えを整理しました。</p>
+  <h3>分析概要</h3>
   <table class="intro-overview">
-    <tr><th>데이터 기간</th><td>2025년 2월 ~ 2026년 2월</td></tr>
-    <tr><th>분석 방법</th><td>수면 시간·시각·활동·감정별 만족도 교차 분석</td></tr>
+    <tr><th>データ期間</th><td>2025年2月～2026年2月</td></tr>
+    <tr><th>分析手法</th><td>睡眠時間・時刻・行動・気分別の満足度クロス分析</td></tr>
   </table>
 </div>
 
 <!-- ===== SECTION 1 ===== -->
 <div class="section">
-  <h2 class="section-title">1. Renight 전체 평균 vs 일본인 평균</h2>
-  <p class="section-desc">2025년 2월부터 2026년 2월까지 Renight에 기록된 수면 데이터에서 일본인 사용자의 기록을 추출하여 전체 평균과 비교했습니다.</p>
+  <h2 class="section-title">1. リナイト全体平均 vs 日本人平均</h2>
+  <p class="section-desc">2025年2月から2026年2月までにリナイトに記録された睡眠データから、日本人ユーザーの記録を抽出し、全体平均と比較しました。</p>
 
   <div class="comparison-summary">
     <div class="summary-card">
-      <div class="label">일본인 평균 수면</div>
+      <div class="label">日本人 平均睡眠</div>
       <div class="value">6h 38m</div>
-      <div class="diff">전체 대비 -12분</div>
+      <div class="diff">全体比 -12分</div>
     </div>
     <div class="summary-card">
-      <div class="label">일본인 평균 취침</div>
+      <div class="label">日本人 平均就寝</div>
       <div class="value">1:06</div>
-      <div class="diff">전체 대비 -15분</div>
+      <div class="diff">全体比 -15分</div>
     </div>
     <div class="summary-card">
-      <div class="label">일본인 평균 기상</div>
+      <div class="label">日本人 平均起床</div>
       <div class="value">7:37</div>
-      <div class="diff">전체 대비 -22분</div>
+      <div class="diff">全体比 -22分</div>
     </div>
     <div class="summary-card">
-      <div class="label">수면 만족도</div>
+      <div class="label">睡眠満足度</div>
       <div class="value">6.67<span style="font-size:.7em;color:#7A7A7A">/10</span></div>
-      <div class="diff">전체 대비 -0.28점</div>
+      <div class="diff">全体比 -0.28点</div>
     </div>
   </div>
 
   <table class="comp-table">
     <thead>
-      <tr><th class="row-label">항목</th><th>Renight 전체</th><th class="hl">일본</th></tr>
+      <tr><th class="row-label">項目</th><th>リナイト全体</th><th class="hl">日本</th></tr>
     </thead>
     <tbody>
-      <tr><td class="row-label">수면 시간</td><td>6시간 50분</td><td class="hl"><strong>6시간 38분</strong></td></tr>
-      <tr><td class="row-label">취침 시각</td><td>오전 1:21</td><td class="hl"><strong>오전 1:06</strong></td></tr>
-      <tr><td class="row-label">기상 시각</td><td>오전 7:59</td><td class="hl"><strong>오전 7:37</strong></td></tr>
-      <tr><td class="row-label">수면 만족도</td><td>6.95 / 10</td><td class="hl"><strong>6.67 / 10</strong></td></tr>
+      <tr><td class="row-label">睡眠時間</td><td>6時間50分</td><td class="hl"><strong>6時間38分</strong></td></tr>
+      <tr><td class="row-label">就寝時刻</td><td>午前 1:21</td><td class="hl"><strong>午前 1:06</strong></td></tr>
+      <tr><td class="row-label">起床時刻</td><td>午前 7:59</td><td class="hl"><strong>午前 7:37</strong></td></tr>
+      <tr><td class="row-label">睡眠満足度</td><td>6.95 / 10</td><td class="hl"><strong>6.67 / 10</strong></td></tr>
     </tbody>
   </table>
 
   <div class="insight-box" style="margin-top:1.25rem">
-    일본인은 Renight 전체 유저 평균에 비해 일찍 잠자리에 들지만 더 일찍 일어납니다. 수면 시간이 짧고 수면에 대한 만족도도 상당히 낮은 경향을 보입니다.
+    日本人はリナイト全体ユーザーの平均と比べて就寝時刻が早い一方、起床時刻も早い傾向があります。その結果、睡眠時間が短く、睡眠満足度も平均より低い傾向が見られます。
   </div>
 </div>
 
 <!-- ===== SECTION 2 ===== -->
 <div class="section">
-  <h2 class="section-title">2. 수면과 수면 만족도의 관계</h2>
+  <h2 class="section-title">2. 睡眠と睡眠満足度の関係</h2>
 
   <div class="section-intro">
-    <h3>'잘 잤다'라는 것은 어떤 의미일까?</h3>
-    <p>우리는 흔히 '수면의 질이 좋다'라는 표현을 잘 잤다는 의미로 쓰곤 합니다. 하지만 종종 잠을 못 잔다고 느꼈음에도 수면 검사에서는 수면의 질이 좋다고 나오기도 하죠. 수면의 질은 객관적 수치로서의 수면이지만 '잘 잤다'라는 것은 자신의 수면 상태에 대해 느끼는 주관적인 판단입니다.<sup>(1), (2)</sup></p>
+    <h3>「よく眠れた」とは？</h3>
+    <p>私たちは「睡眠の質がいい」という言葉を、「よく眠れた」という意味で使うことがよくあります。しかし、自分ではあまり眠れなかったと感じていても、睡眠検査では質が良いと判定されることがあります。睡眠の質は客観的な数値で評価されますが、「よく眠れた」という感覚は、自分の睡眠状態に対する主観的な判断です。<sup>(1), (2)</sup></p>
   </div>
 
-  <p class="section-desc">Renight 사용자는 매일 아침 기상 직후 수면 만족도를 1~10점으로 평가합니다. 이 점수를 수면 시간, 취침/기상 시각, 수면 전 활동·감정과 교차 분석하여, 어떤 요인이 수면의 질에 가장 큰 영향을 미치는지 확인했습니다. 분석 대상은 만족도를 기록한 일본인 수면 데이터입니다.</p>
+  <p class="section-desc">リナイトのユーザーは、毎朝起床直後に睡眠満足度を1〜10点で評価しています。このスコアを睡眠時間、就寝/起床時刻、就寝前の活動・感情とクロス分析し、どの要因が睡眠の質に最も大きく影響するかを検証しました。分析対象は、満足度を記録した日本人の睡眠データです。</p>
 
-  <!-- 2-1 수면 시간 -->
+  <!-- 2-1 睡眠時間 -->
   <div class="chart-block">
-    <h3 class="chart-title">2-1. 수면 시간에 따른 만족도</h3>
-    <p class="sub-section-note">수면 시간을 30분 단위로 나누고, 각 구간의 평균 만족도를 계산했습니다. 빨간색은 7시간 미만, 파란색은 7시간 이상입니다. 점선은 일본인 전체 평균(6.67점)을 나타냅니다.</p>
+    <h3 class="chart-title">2-1. 睡眠時間と満足度の関係</h3>
+    <p class="sub-section-note">睡眠時間を30分単位で区切り、各区間の平均満足度を算出しました。赤色は7時間未満、青色は7時間以上を示しています。点線は日本人全体の平均（6.67点）です。</p>
     <div class="chart-wrap"><canvas id="chartDur" height="150"></canvas></div>
     <div class="insight-box">
-      National Sleep Foundation에 따르면 나이대에 따라 조금씩 다르지만 대체로 권장 수면시간을 7-9시간이라고 합니다.<sup>(3)</sup> 권장 수면시간의 최소점인 7시간을 넘겼을 때부터 평균보다 자신의 수면에 만족하는 경향을 보입니다. 수면에 대한 만족도는 수면 시간이 증가할수록 올라가는 선형 관계를 보이고 있습니다.
+      National Sleep Foundationによると、年齢によって多少異なりますが、推奨睡眠時間は概ね7〜9時間とされています。<sup>(3)</sup> 推奨下限である7時間を超えたあたりから、平均を上回る満足度が見られました。睡眠時間が長くなるほど満足度が高まる、直線的な関係が確認されました。
     </div>
     <div class="special-insight si-7wall">
-      <div class="si-title">&#x1F9F1; "7시간의 벽"</div>
+      <div class="si-title">&#x1F9F1; 「7時間の壁」</div>
       <div class="si-body">
-        데이터가 말하는 가장 중요한 분기점. 수면 시간이 6시간대에서 7시간으로 넘어가는 순간, 만족도가 <span class="si-stat">6.67 &rarr; 6.83</span>로 급상승한다. 이 30분의 차이는 다른 어떤 30분 구간보다 <strong>2배 큰 효과</strong>를 만든다.
+        データが示す最も重要な分岐点です。睡眠時間が6時間台から7時間に入ると、満足度は<span class="si-stat">6.67 &rarr; 6.83</span>へと大きく上昇します。この30分の差は、他のどの30分区間と比べても<strong>2倍の効果</strong>が見られました。
       </div>
     </div>
   </div>
 
-  <!-- 2-2 취침 시각 -->
+  <!-- 2-2 就寝時刻 -->
   <div class="chart-block">
-    <h3 class="chart-title">2-2. 취침 시각에 따른 만족도</h3>
-    <p class="sub-section-note">취침 시각을 1시간 단위로 나누어 만족도를 비교했습니다. 20시~4시 범위를 표시하며, 파란색은 만족도가 높은 시간대(20~22시)입니다. 일본인이 가장 많이 잠드는 시각은 0시이지만, 만족도가 가장 높은 시각은 21시입니다.</p>
+    <h3 class="chart-title">2-2. 就寝時刻と満足度の関係</h3>
+    <p class="sub-section-note">就寝時刻を1時間単位で区切り、満足度を比較しました。20時〜4時の範囲を表示しており、青色は満足度が高い時間帯（20〜23時）を示しています。日本人の就寝が最も多い時刻は0時ですが、満足度が最も高いのは21時台です。</p>
     <div class="chart-wrap"><canvas id="chartBed" height="140"></canvas></div>
     <div class="insight-box">
-      자정 이전에 잠드는 경우 가장 만족한다고 하며, 취침시각이 늦어질수록 만족도가 일관되게 하락합니다. 취침시각이 23시대에서 0시대로 변할 경우 감소폭이 가장 큽니다.(-0.12)
+      日付が変わる前に就寝した場合、満足度が最も高くなります。就寝が遅くなるほど満足度は一貫して低下し、23時台から0時台にかけて最も大きく下がります（-0.12）。
     </div>
   </div>
 
-  <!-- 2-3 기상 시각 -->
+  <!-- 2-3 起床時刻 -->
   <div class="chart-block">
-    <h3 class="chart-title">2-3. 기상 시각에 따른 만족도</h3>
-    <p class="sub-section-note">기상 시각별 만족도를 비교했습니다. 일본인의 과반수가 6~7시에 기상하지만, 늦게 일어날수록 만족도가 높아지는 경향이 있습니다.</p>
+    <h3 class="chart-title">2-3. 起床時刻と満足度の関係</h3>
+    <p class="sub-section-note">起床時刻別の満足度を比較しました。日本人の過半数が6〜7時に起床していますが、遅く起きるほど満足度が高まる傾向があります。</p>
     <div class="chart-wrap"><canvas id="chartWake" height="140"></canvas></div>
     <div class="insight-box">
-      대체로 기상 시각이 늦어질수록 만족한다고 하며, 기상시각을 7시에서 8시로 늦췄을 때와 8시에서 9시로 늦췄을 때 가장 큰 증가폭을 보입니다.
+      起床時刻が遅いほど満足度は高い傾向にあり、7時台から8時台、8時台から9時台にかけて最も大きな上昇が確認されました。
     </div>
   </div>
 
-  <!-- 2-4 활동 -->
+  <!-- 2-4 活動 -->
   <div class="chart-block">
-    <h3 class="chart-title">2-4. 수면 전 활동에 따른 만족도</h3>
-    <p class="sub-section-note">Renight 사용자가 잠들기 전 기록한 15가지 활동별 수면 만족도입니다. 파란색은 평균보다 높은 활동, 빨간색은 평균보다 낮은 활동입니다.</p>
+    <h3 class="chart-title">2-4. 就寝前の活動と満足度の関係</h3>
+    <p class="sub-section-note">リナイトユーザーが就寝前に記録した15種類の活動別に、睡眠満足度を集計しました。青色は平均より高い活動、赤色は平均より低い活動です。</p>
     <div class="chart-wrap"><canvas id="chartActivity" height="210"></canvas></div>
     <div class="insight-box">
-      신체 활동이 수면 만족도와 가장 강한 양의 상관관계를 보입니다. 운동(6.95)과 산책(6.93)이 만족도 1, 2위이며, 스트레칭(6.82)과 일기쓰기(6.82)가 그 뒤를 잇습니다. 반면 음주(6.46)와 니코틴(6.45)은 만족도 최하위로, 평균 대비 약 -0.21점 낮습니다.
+      身体活動は、睡眠満足度との相関が最も高い活動でした。運動（6.95）と散歩（6.93）が上位を占め、ストレッチ（6.82）と日記（6.82）が続きます。一方、飲酒（6.46）とニコチン（6.45）は最も低く、平均より約0.21低い結果となりました。
     </div>
 
     <div class="special-insight si-alcohol">
-      <div class="si-title">&#x1F377; 술의 역설 — 더 오래 자지만, 더 나쁘게 잔다</div>
+      <div class="si-title">&#x1F377; お酒の逆説 ── 睡眠時間は長くなるが、睡眠の質は低下</div>
       <div class="si-body">
-        음주 후 수면 시간은 평균보다 <span class="si-stat">+12.0분</span> 깁니다. 하지만 수면 만족도는 <span class="si-stat">6.46</span>으로, 전체 평균(6.67)보다 <strong>0.21점 낮습니다</strong>. 데이터가 일관되게 보여주는 결과입니다.
+        飲酒後の睡眠時間は平均より<span class="si-stat">+12.0分</span>長くなります。一方で、睡眠満足度は<span class="si-stat">6.46</span>と、全体平均（6.67）より<strong>0.21低い結果でした</strong>。お酒は寝つきを早める一方で、睡眠の質を低下させます。データからも同様の傾向が確認されました。
         <br><br>
-        술은 잠을 빨리 오게 하지만, 수면의 질을 떨어뜨립니다. 더 오래 자도 개운하지 않은 이유가 여기에 있습니다.
+        長く眠ってもすっきりしない原因の一つと考えられます。
       </div>
     </div>
 
     <div class="special-insight si-caffeine">
-      <div class="si-title">&#x2615; 카페인 &amp; 니코틴 — 수면을 깎는 습관</div>
+      <div class="si-title">&#x2615; カフェイン＆ニコチン ── 睡眠を削る習慣</div>
       <div class="si-body">
-        <strong>카페인</strong>: 수면 시간 <span class="si-stat">-15.0분</span>, 만족도 <span class="si-stat">6.58</span> (-0.09)<br>
-        <strong>니코틴</strong>: 취침 시각 <span class="si-stat">1:30</span>, 만족도 <span class="si-stat">6.45</span> (-0.21)
+        <strong>カフェイン</strong>：睡眠時間 <span class="si-stat">-15.0分</span>、満足度 <span class="si-stat">6.58</span>（-0.09）<br>
+        <strong>ニコチン</strong>：就寝時刻 <span class="si-stat">1:30</span>、満足度 <span class="si-stat">6.45</span>（-0.21）
         <br><br>
-        니코틴 사용자는 평균보다 늦은 1:30에 취침합니다. 반면 운동은 취침을 <span class="si-stat">0:48</span>로 앞당깁니다.
+        ニコチンを使用する人は、平均より遅い1:30に就寝する傾向があります。一方、運動をしている人は就寝が<span class="si-stat">0:48</span>と早まっています。
       </div>
     </div>
   </div>
 
-  <!-- 2-5 감정 -->
+  <!-- 2-5 感情 -->
   <div class="chart-block">
-    <h3 class="chart-title">2-5. 수면 전 감정에 따른 만족도</h3>
-    <p class="sub-section-note">잠들기 전 기록한 감정 상태별 수면 만족도입니다. 긍정적 감정(파란색)과 부정적 감정(빨간색)으로 나뉘며, 감정 상태가 수면의 질에 미치는 영향은 수면 시간 못지않게 큽니다.</p>
+    <h3 class="chart-title">2-5. 就寝前の感情と満足度の関係</h3>
+    <p class="sub-section-note">就寝前に記録された感情別の睡眠満足度です。ポジティブな感情（青色）とネガティブな感情（赤色）に分かれており、感情の状態が睡眠の質に与える影響は、睡眠時間に匹敵するほど大きいことが示されています。</p>
     <div class="chart-wrap"><canvas id="chartMood" height="160"></canvas></div>
     <div class="insight-box">
-      긍정적 감정과 부정적 감정 사이에 뚜렷한 만족도 격차가 나타납니다. 행복(7.09)과 기쁨(7.08)이 가장 높고, 우울(6.28)과 스트레스(6.41)가 가장 낮습니다. 행복한 밤과 우울한 밤의 만족도 차이는 0.81점으로, 이는 5시간 수면과 7시간 수면의 만족도 차이와 비슷한 수준입니다.
+      ポジティブな感情とネガティブな感情の間には、満足度に明確な差が見られます。幸福（7.09）と喜び（7.08）が最も高く、憂うつ（6.28）とストレス（6.41）が最も低い結果でした。幸福な夜と憂うつな夜の満足度差は0.81点に達し、これは5時間睡眠と7時間睡眠の満足度差に匹敵する水準です。
     </div>
   </div>
 
-  <!-- 공통 인사이트 -->
+  <!-- 共通インサイト -->
   <div class="special-insight si-awake">
-    <div class="si-title">&#x2728; 잘 자기 위해 잘 깨어있기</div>
+    <div class="si-title">&#x2728; よく眠るために、日中の過ごし方も大切です</div>
     <div class="si-body">
-      빛, 온습도, 침구의 편안함도 수면에 영향을 주지만, 심리적 상태, 생활 습관, 신체 건강, 사회적인 관계도 수면에 있어 중요한 요인입니다. 스트레스, 불안, 우울, 외로움이나 갈등이 수면의 만족도를 떨어뜨리기도 합니다.<sup>(4)</sup> 여러분이 충실히 보낸 낮과 스스로를 돌보았던 저녁이 좋은 밤을 만들 수 있습니다.
+      光や温湿度、寝具の快適さも睡眠に影響を与えますが、心理状態や生活習慣、健康状態、そして人間関係も睡眠にとって重要な要素です。ストレス、不安、憂うつ、孤独感や葛藤は、睡眠の満足度を下げることがあります。<sup>(4)</sup> 充実した昼間の過ごし方と、自分をいたわる夜の時間が、良い眠りにつながります。
     </div>
   </div>
 
-  <!-- 2-6 주중 vs 주말 -->
+  <!-- 2-6 平日 vs 週末 -->
   <div class="chart-block" style="margin-top:2rem">
-    <h3 class="chart-title">2-6. 주중 vs 주말 수면 시간 및 만족도</h3>
-    <p class="sub-section-note">요일별 수면 시간(막대)과 만족도(빨간 선)를 동시에 표시했습니다. 연파란 배경이 주말(토·일)입니다.</p>
+    <h3 class="chart-title">2-6. 平日 vs 週末の睡眠時間と満足度</h3>
+    <p class="sub-section-note">曜日別の睡眠時間（棒グラフ）と満足度（赤い線）を同時に表示しています。薄い青の背景が週末（土・日）です。</p>
 
     <div class="weekday-cards">
       <div class="wd-card weekday">
-        <div class="wd-label">주중 평균 (월~금)</div>
-        <div class="wd-value">6시간 34분</div>
-        <div class="wd-sub">만족도 6.62</div>
+        <div class="wd-label">平日平均（月〜金）</div>
+        <div class="wd-value">6時間34分</div>
+        <div class="wd-sub">満足度 6.62</div>
       </div>
       <div class="wd-vs">VS</div>
       <div class="wd-card weekend">
-        <div class="wd-label">주말 평균 (토~일)</div>
-        <div class="wd-value">6시간 51분</div>
-        <div class="wd-sub">만족도 6.82</div>
+        <div class="wd-label">週末平均（土〜日）</div>
+        <div class="wd-value">6時間51分</div>
+        <div class="wd-sub">満足度 6.82</div>
       </div>
     </div>
 
     <div class="chart-wrap"><canvas id="chartWeekday" height="140"></canvas></div>
 
     <div class="insight-box">
-      평균적으로 주말에 더 길고(+17분), 더 만족스럽게(+0.21) 수면하고 있습니다. 이는 주중에 부족한 잠을 주말에 보상하려는 경향으로 볼 수 있으며, 수면시간이 길어질수록 수면 만족도가 증가하는 경향과 일치합니다.
+      平均的に週末のほうが睡眠時間は長く（+17分）、満足度も高くなっています（+0.21）。これは平日に不足した睡眠を週末に補おうとする傾向を反映しており、睡眠時間が長いほど満足度が高まるという全体的な傾向と一致しています。
     </div>
   </div>
 
-  <!-- 2-7 취침/기상 시각 -->
+  <!-- 2-7 就寝/起床時刻 -->
   <div class="chart-block" style="margin-top:2rem">
-    <h3 class="chart-title">2-7. 주중 vs 주말 취침시각과 기상시각 비교</h3>
-    <p class="sub-section-note">요일별 평균 취침 시각과 기상 시각을 각각 표시했습니다.</p>
+    <h3 class="chart-title">2-7. 平日 vs 週末の就寝時刻と起床時刻の比較</h3>
+    <p class="sub-section-note">曜日別の平均就寝時刻と起床時刻をそれぞれ表示しました。</p>
 
     <div class="chart-wrap"><canvas id="chartBedtimeByDay" height="140"></canvas></div>
     <div class="chart-wrap"><canvas id="chartWaketimeByDay" height="140"></canvas></div>
 
     <div class="insight-box">
-      주말에는 취침이 늦어지고 기상도 늦어져, 수면 시간대 전체가 뒤로 이동한다. 주중에 못 잤던 만큼 주말에 만회하려 노력하지만 주중과 주말의 취침&amp;기상시각 격차가 클수록 오히려 피곤해진다.
+      週末は就寝が遅くなり、起床も遅くなるため、睡眠時間帯全体が遅くなります。平日の睡眠不足を週末に取り戻そうとしますが、平日と週末の就寝・起床時刻のずれが大きいほど、かえって疲労が蓄積されやすくなります。
     </div>
 
     <div class="special-insight si-weekend">
-      <div class="si-title">&#x1F6CF;&#xFE0F; 주말 늦잠의 함정</div>
+      <div class="si-title">&#x1F6CF;&#xFE0F; 週末の寝だめの落とし穴</div>
       <div class="si-body">
-        많은 사람들이 주중에 못 잔만큼 주말에 늦잠으로 만회하려 합니다. 하지만 더 늦게 자고 늦게 일어나는 것은 우리 몸에 주말마다 비행기를 타고 멀리 이동하는 것 같은 스트레스를 줍니다. 오늘이 지나는 것이 아깝더라도 취침시각은 최대한 일정하게, 내일 별다른 일정이 없더라도 기상시각을 너무 늦지 않게 유지하는 것이 다음주의 나를 위한 일입니다.<sup>(5), (6)</sup>
+        平日に足りなかった分を、週末の寝だめで補おうとする人は少なくありません。しかし、遅く寝て遅く起きる生活は、毎週末に飛行機で長距離移動するのと同じくらい体に負担をかけてしまいます。今日が終わるのが惜しくても、就寝時刻はなるべく一定に保ち、翌日に予定がなくても起床時刻を大きく遅らせないこと──それが来週の自分への投資になります。<sup>(5), (6)</sup>
       </div>
     </div>
   </div>
 </div>
 
-<!-- ===== SECTION 3: 추천 ===== -->
+<!-- ===== SECTION 3: 提案 ===== -->
 <div class="section">
-  <h2 class="section-title">3. 수면 만족도를 높이는 방법</h2>
-  <p class="section-desc">앞서 분석한 수면 시간, 취침 시각, 활동, 감정 데이터를 종합하여 만족도 향상에 실질적 효과가 확인된 방법들을 정리했습니다.</p>
+  <h2 class="section-title">3. 睡眠満足度を高める方法</h2>
+  <p class="section-desc">これまで分析した睡眠時間、就寝時刻、活動、感情のデータを総合し、満足度向上に実際の効果が確認された方法をまとめました。</p>
 
   <div class="rec-grid">
     <div class="rec-card">
-      <div class="rec-title">1) 7시간 이상 자세요</div>
-      <div class="rec-evidence"><span class="num">7시간 수면자 만족도 6.83</span> vs 6시간대 6.58 &rarr; +0.25점</div>
-      <div class="rec-action">현재 일본인 평균 6시간 38분. 취침을 22분만 앞당기면 된다.</div>
+      <div class="rec-title">1）7時間以上眠りましょう</div>
+      <div class="rec-evidence"><span class="num">7時間睡眠の満足度 6.83</span> vs 6時間台 6.58 &rarr; +0.25点</div>
+      <div class="rec-action">現在の日本人平均は6時間38分。就寝を22分早めるだけで達成できます。</div>
     </div>
 
     <div class="rec-card">
-      <div class="rec-title">2) 밤 11시(23시) 이전에 잠들어 보세요</div>
-      <div class="rec-evidence"><span class="num">22시 취침 6.84</span> vs 0시 이후 6.68 &rarr; +0.16점</div>
-      <div class="rec-action">취침 시각이 1시간 늦어질 때마다 만족도 약 0.10점 하락. 일본인 평균(1:06)에서 1시간만 앞당겨 보세요.</div>
+      <div class="rec-title">2）23時より前に眠ってみましょう</div>
+      <div class="rec-evidence"><span class="num">22時就寝 6.84</span> vs 0時以降 6.68 &rarr; +0.16点</div>
+      <div class="rec-action">就寝が1時間遅くなるごとに満足度は約0.10点低下します。日本人平均（1:06）より1時間早く就寝してみてください。</div>
     </div>
 
     <div class="rec-card">
-      <div class="rec-title">3) 저녁에 가벼운 운동이나 산책을 해보세요</div>
-      <div class="rec-evidence"><span class="num">운동 6.95(0.28)</span> / 산책 6.93(0.27) — 수면 전 활동 중 만족도 1위</div>
-      <div class="rec-action">20~30분의 가벼운 운동이나 산책이면 충분. 운동자의 만족도는 +0.28점 높다.</div>
+      <div class="rec-title">3）夕方に軽い運動や散歩をしてみましょう</div>
+      <div class="rec-evidence"><span class="num">運動 6.95（+0.28）</span>/ 散歩 6.93（+0.27）── 就寝前の活動で満足度1位</div>
+      <div class="rec-action">20〜30分の軽い運動や散歩で十分です。運動した人の満足度は+0.28点高い結果が出ています。</div>
     </div>
 
     <div class="rec-card">
-      <div class="rec-title">4) 스트레칭이나 일기쓰기로 하루를 마무리해보세요</div>
-      <div class="rec-evidence"><span class="num">스트레칭 6.82(0.16)</span> / 일기쓰기 6.82(0.16)</div>
-      <div class="rec-action">취침 전 5~10분의 스트레칭이나 감사 일기 쓰기. 독서(6.79)도 좋은 선택.</div>
+      <div class="rec-title">4）ストレッチや日記で1日を締めくくりましょう</div>
+      <div class="rec-evidence"><span class="num">ストレッチ 6.82（+0.16）</span>/ 日記 6.82（+0.16）</div>
+      <div class="rec-action">就寝前に5〜10分ほどストレッチをしたり、感謝を書き出す日記をつけるのがおすすめです。読書（6.79）も良い選択肢になります。</div>
     </div>
 
     <div class="rec-card caution">
-      <div class="rec-title">5) 취침 전 음주를 줄여보세요</div>
-      <div class="rec-evidence"><span class="num">음주 6.46(-0.21)</span> — 수면 +12.0분이지만 만족도 최하위</div>
-      <div class="rec-action">술은 수면 시간을 늘리지만 질을 떨어뜨린다. 주 3일만 음주 없이 취침해보세요.</div>
+      <div class="rec-title">5）就寝前の飲酒を控えてみましょう</div>
+      <div class="rec-evidence"><span class="num">飲酒 6.46（-0.21）</span>── 睡眠 +12.0分でも満足度は最下位</div>
+      <div class="rec-action">お酒は睡眠時間を延ばすことがありますが、睡眠の質は低下しやすくなります。週に3日は休肝日を設けましょう。</div>
     </div>
 
     <div class="rec-card caution">
-      <div class="rec-title">6) 카페인과 니코틴을 줄여보세요</div>
-      <div class="rec-evidence"><span class="num">카페인 -15.0분 / 니코틴 만족도 -0.21</span></div>
-      <div class="rec-action">카페인은 수면 시간을 직접 줄이고, 니코틴은 수면의 질을 떨어뜨린다. 오후 2시 이후 카페인 차단, 취침 2시간 전 흡연 중단을 시도해보세요.</div>
+      <div class="rec-title">6）カフェインとニコチンを控えてみましょう</div>
+      <div class="rec-evidence"><span class="num">カフェイン -15.0分 / ニコチン 満足度 -0.21</span></div>
+      <div class="rec-action">カフェインは睡眠時間を短くし、ニコチンは睡眠の質を低下させます。午後2時以降はカフェインを控え、就寝2時間前から禁煙してみてください。</div>
     </div>
 
     <div class="rec-card">
-      <div class="rec-title">7) 긍정적인 마음으로 잠들어 보세요</div>
-      <div class="rec-evidence"><span class="num">행복한 밤 7.09 vs 우울한 밤 6.28</span> &rarr; 0.81점 차이</div>
-      <div class="rec-action">감정 상태가 수면 만족도에 미치는 영향은 수면 시간 2시간 차이와 동일. 취침 전 감사한 일 3가지를 떠올려 보세요.</div>
+      <div class="rec-title">7）前向きな気持ちで眠りにつきましょう</div>
+      <div class="rec-evidence"><span class="num">幸せな夜 7.09 vs 憂うつな夜 6.28</span> &rarr; 0.81点の差</div>
+      <div class="rec-action">感情は睡眠満足度に大きく影響し、その効果は睡眠時間2時間分の差に匹敵します。就寝前に「感謝していること」を3つ思い浮かべる習慣は、睡眠満足度の向上につながる可能性があります。</div>
     </div>
 
     <div class="rec-card" style="border-left-color:#4876EE">
-      <div class="rec-title" style="color:#4876EE">&#x1F3AF; 가장 효과적인 조합</div>
-      <div class="rec-evidence">22시 이전 취침 + 7시간 이상 수면 + 저녁 산책/운동 + 긍정적 감정</div>
-      <div class="rec-action" style="background:#DAE4FC;color:#2C3E5C">예상 만족도 <strong>7.2점 이상</strong> (현재 일본 평균 6.67 대비 +0.53점)</div>
+      <div class="rec-title" style="color:#4876EE">&#x1F3AF; 最も効果的な組み合わせ</div>
+      <div class="rec-evidence">22時前に就寝 + 7時間以上の睡眠 + 夕方の散歩/運動 + ポジティブな感情</div>
+      <div class="rec-action" style="background:#DAE4FC;color:#2C3E5C">予想満足度 <strong>7.2点以上</strong>（現在の日本人平均 6.67 に対して +0.53点）</div>
     </div>
   </div>
 </div>
 
 <div class="references">
-  <h2>출처</h2>
+  <h2>参考文献</h2>
   <ol>
     <li>Kohyama, J. (2021). Which is more important for health: sleep quantity or sleep quality?. <em>Children</em>, <em>8</em>(7), 542.</li>
     <li>Ahrensberg, H., Christensen, A. I., Andersen, S., &amp; Petersen, C. B. (2025). Comparison of self-reported sleep sufficiency and accelerometer-measured sleep duration in relation to mental health, physical health, and life satisfaction. <em>Frontiers in sleep</em>, <em>4</em>, 1661250.</li>
@@ -398,7 +398,7 @@ footer{text-align:center;padding:2rem;color:#7A7A7A;font-size:.8rem}
 </main>
 
 <footer>
-  <p>Renight 수면 데이터 리포트 | 분석 기간: 2025.02 ~ 2026.02</p>
+  <p>リナイト 睡眠データレポート | 分析期間: 2025.02 ~ 2026.02</p>
   <p>&copy; 2026 Renight. All rights reserved.</p>
 </footer>
 
@@ -416,7 +416,7 @@ function annotationLine(label, value, color='rgba(183,19,19,.6)') {
   };
 }
 
-/* 2-1. 수면 시간 vs 만족도 */
+/* 2-1. 睡眠時間 vs 満足度 */
 (() => {
   const labels = ['3.0h', '3.5h', '4.0h', '4.5h', '5.0h', '5.5h', '6.0h', '6.5h', '7.0h', '7.5h', '8.0h', '8.5h', '9.0h', '9.5h', '10.0h'];
   const data = [6.13, 6.2, 6.2, 6.27, 6.39, 6.47, 6.58, 6.67, 6.83, 6.92, 7.04, 7.12, 7.19, 7.2, 7.29];
@@ -434,12 +434,12 @@ function annotationLine(label, value, color='rgba(183,19,19,.6)') {
         legend:{display:false},
         annotation:{
           annotations:{
-            avg: annotationLine('일본 평균 '+JP_AVG, JP_AVG),
+            avg: annotationLine('日本平均 '+JP_AVG, JP_AVG),
             wall:{
               type:'box', xMin:7.5, xMax:8.5,
               backgroundColor:'rgba(59,130,255,.08)', borderColor:'rgba(59,130,255,.3)',
               borderWidth:1, borderDash:[4,4],
-              label:{ display:true, content:'7시간의 벽', position:{x:'center',y:'start'},
+              label:{ display:true, content:'7時間の壁', position:{x:'center',y:'start'},
                       color:'#2C3E5C', font:{size:10,weight:'bold'} }
             }
           }
@@ -447,16 +447,16 @@ function annotationLine(label, value, color='rgba(183,19,19,.6)') {
       },
       scales:{
         y:{min:6.0, max:7.4, ticks:{callback:v=>v.toFixed(1)},
-           title:{display:true, text:'수면 만족도 (10점)', font:{size:11}}},
-        x:{title:{display:true, text:'수면 시간', font:{size:11}}}
+           title:{display:true, text:'睡眠満足度（10点）', font:{size:11}}},
+        x:{title:{display:true, text:'睡眠時間', font:{size:11}}}
       }
     }
   });
 })();
 
-/* 2-2. 취침 시각 vs 만족도 */
+/* 2-2. 就寝時刻 vs 満足度 */
 (() => {
-  const labels = ['20시', '21시', '22시', '23시', '0시', '1시', '2시', '3시', '4시'];
+  const labels = ['20時', '21時', '22時', '23時', '0時', '1時', '2時', '3時', '4時'];
   const data = [6.81, 6.86, 6.84, 6.8, 6.68, 6.6, 6.55, 6.52, 6.52];
   const hours = [20, 21, 22, 23, 0, 1, 2, 3, 4];
   const colors = hours.map(h => h >= 20 && h <= 23 ? 'rgba(72,118,238,.75)' : 'rgba(122,122,122,.35)');
@@ -468,20 +468,20 @@ function annotationLine(label, value, color='rgba(183,19,19,.6)') {
       responsive:true,
       plugins:{
         legend:{display:false},
-        annotation:{annotations:{ avg: annotationLine('일본 평균 '+JP_AVG, JP_AVG) }}
+        annotation:{annotations:{ avg: annotationLine('日本平均 '+JP_AVG, JP_AVG) }}
       },
       scales:{
         y:{min:6.4, max:7.0, ticks:{callback:v=>v.toFixed(1)},
-           title:{display:true, text:'수면 만족도 (10점)', font:{size:11}}},
-        x:{title:{display:true, text:'취침 시각', font:{size:11}}}
+           title:{display:true, text:'睡眠満足度（10点）', font:{size:11}}},
+        x:{title:{display:true, text:'就寝時刻', font:{size:11}}}
       }
     }
   });
 })();
 
-/* 2-3. 기상 시각 vs 만족도 */
+/* 2-3. 起床時刻 vs 満足度 */
 (() => {
-  const labels = ['4시', '5시', '6시', '7시', '8시', '9시', '10시', '11시', '12시'];
+  const labels = ['4時', '5時', '6時', '7時', '8時', '9時', '10時', '11時', '12時'];
   const data = [6.45, 6.53, 6.61, 6.62, 6.76, 6.89, 6.95, 6.96, 6.97];
   const hours = [4, 5, 6, 7, 8, 9, 10, 11, 12];
   const colors = hours.map(h => h >= 8 ? 'rgba(72,118,238,.75)' : 'rgba(122,122,122,.35)');
@@ -493,20 +493,20 @@ function annotationLine(label, value, color='rgba(183,19,19,.6)') {
       responsive:true,
       plugins:{
         legend:{display:false},
-        annotation:{annotations:{ avg: annotationLine('일본 평균 '+JP_AVG, JP_AVG) }}
+        annotation:{annotations:{ avg: annotationLine('日本平均 '+JP_AVG, JP_AVG) }}
       },
       scales:{
         y:{min:6.3, max:7.1, ticks:{callback:v=>v.toFixed(1)},
-           title:{display:true, text:'수면 만족도 (10점)', font:{size:11}}},
-        x:{title:{display:true, text:'기상 시각', font:{size:11}}}
+           title:{display:true, text:'睡眠満足度（10点）', font:{size:11}}},
+        x:{title:{display:true, text:'起床時刻', font:{size:11}}}
       }
     }
   });
 })();
 
-/* 2-4. 활동별 만족도 */
+/* 2-4. 活動別満足度 */
 (() => {
-  const labels = ['운동', '산책', '일기쓰기', '스트레칭', '독서', '게임', '낮잠', '샤워', '야식', '업무/공부', '스마트폰', 'TV 시청', '커피', '음주', '니코틴'];
+  const labels = ['運動', '散歩', '日記', 'ストレッチ', '読書', 'ゲーム', '昼寝', 'シャワー', '夜食', '仕事/勉強', 'スマホ', 'テレビ', 'コーヒー', '飲酒', 'ニコチン'];
   const data = [6.95, 6.93, 6.82, 6.82, 6.79, 6.77, 6.71, 6.71, 6.7, 6.7, 6.67, 6.62, 6.58, 6.46, 6.45];
   const colors = data.map(v => {
     if (v >= 6.8) return 'rgba(59,130,255,.7)';
@@ -526,7 +526,7 @@ function annotationLine(label, value, color='rgba(183,19,19,.6)') {
           avg:{
             type:'line', xMin:JP_AVG, xMax:JP_AVG,
             borderColor:'rgba(183,19,19,.6)', borderWidth:1.5, borderDash:[6,3],
-            label:{ display:true, content:'평균 '+JP_AVG, position:'start',
+            label:{ display:true, content:'平均 '+JP_AVG, position:'start',
                     backgroundColor:'rgba(183,19,19,.6)', color:'#fff',
                     font:{size:10,weight:'bold'},
                     padding:{top:2,bottom:2,left:4,right:4}, borderRadius:3 }
@@ -535,16 +535,16 @@ function annotationLine(label, value, color='rgba(183,19,19,.6)') {
       },
       scales:{
         x:{min:6.2, max:7.1, ticks:{callback:v=>v.toFixed(1)},
-           title:{display:true, text:'수면 만족도 (10점)', font:{size:11}}},
+           title:{display:true, text:'睡眠満足度（10点）', font:{size:11}}},
         y:{ticks:{font:{size:12}}}
       }
     }
   });
 })();
 
-/* 2-5. 감정별 만족도 */
+/* 2-5. 感情別満足度 */
 (() => {
-  const labels = ['행복', '기쁨', '만족', '설렘', '편안함', '긴장', '불안', '슬픔', '스트레스', '우울'];
+  const labels = ['幸福', '喜び', '満足', 'ときめき', '安らぎ', '緊張', '不安', '悲しみ', 'ストレス', '憂うつ'];
   const data = [7.09, 7.08, 7.05, 7.0, 6.87, 6.49, 6.44, 6.43, 6.41, 6.28];
   const colors = data.map(v => v >= JP_AVG ? 'rgba(72,118,238,.7)' : 'rgba(183,19,19,.45)');
 
@@ -559,7 +559,7 @@ function annotationLine(label, value, color='rgba(183,19,19,.6)') {
           avg:{
             type:'line', xMin:JP_AVG, xMax:JP_AVG,
             borderColor:'rgba(183,19,19,.6)', borderWidth:1.5, borderDash:[6,3],
-            label:{ display:true, content:'평균 '+JP_AVG, position:'start',
+            label:{ display:true, content:'平均 '+JP_AVG, position:'start',
                     backgroundColor:'rgba(183,19,19,.6)', color:'#fff',
                     font:{size:10,weight:'bold'},
                     padding:{top:2,bottom:2,left:4,right:4}, borderRadius:3 }
@@ -568,16 +568,16 @@ function annotationLine(label, value, color='rgba(183,19,19,.6)') {
       },
       scales:{
         x:{min:6.0, max:7.2, ticks:{callback:v=>v.toFixed(1)},
-           title:{display:true, text:'수면 만족도 (10점)', font:{size:11}}},
+           title:{display:true, text:'睡眠満足度（10点）', font:{size:11}}},
         y:{ticks:{font:{size:12}}}
       }
     }
   });
 })();
 
-/* 2-6. 요일별 패턴 */
+/* 2-6. 曜日別パターン */
 (() => {
-  const days = ['월', '화', '수', '목', '금', '토', '일'];
+  const days = ['月', '火', '水', '木', '金', '土', '日'];
   const dur = [6.766, 6.511, 6.569, 6.517, 6.481, 6.789, 6.9];
   const rat = [6.63, 6.61, 6.62, 6.61, 6.62, 6.8, 6.85];
 
@@ -587,11 +587,11 @@ function annotationLine(label, value, color='rgba(183,19,19,.6)') {
       labels: days,
       datasets:[
         {
-          label:'수면 시간(h)', data:dur, backgroundColor: dur.map((_,i)=> i>=5 ? 'rgba(72,118,238,.7)' : 'rgba(122,122,122,.35)'),
+          label:'睡眠時間(h)', data:dur, backgroundColor: dur.map((_,i)=> i>=5 ? 'rgba(72,118,238,.7)' : 'rgba(122,122,122,.35)'),
           borderRadius:4, yAxisID:'yDur', barPercentage:.55, order:2
         },
         {
-          label:'만족도(10점)', data:rat, type:'line',
+          label:'満足度(10点)', data:rat, type:'line',
           borderColor:'#B71313', backgroundColor:'rgba(183,19,19,.1)',
           pointBackgroundColor:'#B71313', pointRadius:5, tension:.3,
           yAxisID:'yRat', order:1
@@ -614,17 +614,17 @@ function annotationLine(label, value, color='rgba(183,19,19,.6)') {
       },
       scales:{
         yDur:{position:'left', min:6.0, max:7.2, ticks:{callback:v=>v.toFixed(1)+'h'},
-              title:{display:true, text:'수면 시간(h)', font:{size:11}}},
+              title:{display:true, text:'睡眠時間(h)', font:{size:11}}},
         yRat:{position:'right', min:6.4, max:7.0, ticks:{callback:v=>v.toFixed(1)},
-              title:{display:true, text:'만족도(10점)', font:{size:11}}, grid:{drawOnChartArea:false}}
+              title:{display:true, text:'満足度(10点)', font:{size:11}}, grid:{drawOnChartArea:false}}
       }
     }
   });
 })();
 
-/* 2-7a. 요일별 취침 시각 */
+/* 2-7a. 曜日別就寝時刻 */
 (() => {
-  const days = ['월', '화', '수', '목', '금', '토', '일'];
+  const days = ['月', '火', '水', '木', '金', '土', '日'];
   const bedtime = [1.08, 0.97, 0.99, 1.0, 1.02, 1.34, 1.49];
   const bedColors = bedtime.map((_, i) => i >= 5 ? 'rgba(72,118,238,.7)' : 'rgba(100,100,100,.4)');
 
@@ -639,7 +639,7 @@ function annotationLine(label, value, color='rgba(183,19,19,.6)') {
     data: {
       labels: days,
       datasets: [{
-        label: '취침 시각', data: bedtime,
+        label: '就寝時刻', data: bedtime,
         backgroundColor: bedColors, borderRadius: 4, barPercentage: 0.55,
       }]
     },
@@ -647,7 +647,7 @@ function annotationLine(label, value, color='rgba(183,19,19,.6)') {
       responsive: true,
       plugins: {
         legend: { display: false },
-        tooltip: { callbacks: { label: ctx => '취침 ' + hToStr(ctx.raw) } },
+        tooltip: { callbacks: { label: ctx => '就寝 ' + hToStr(ctx.raw) } },
         annotation: {
           annotations: {
             weekend: {
@@ -658,7 +658,7 @@ function annotationLine(label, value, color='rgba(183,19,19,.6)') {
             avgLine: {
               type: 'line', yMin: 1.10, yMax: 1.10,
               borderColor: 'rgba(183,19,19,.5)', borderWidth: 1, borderDash: [6, 3],
-              label: { display: true, content: '전체 평균 1:06', position: 'start', backgroundColor: 'rgba(183,19,19,.08)', color: '#B71313', font: { size: 10 } }
+              label: { display: true, content: '全体平均 1:06', position: 'start', backgroundColor: 'rgba(183,19,19,.08)', color: '#B71313', font: { size: 10 } }
             }
           }
         }
@@ -667,17 +667,17 @@ function annotationLine(label, value, color='rgba(183,19,19,.6)') {
         y: {
           min: 0.5, max: 1.8,
           ticks: { stepSize: 0.25, callback: function(v) { return hToStr(v); } },
-          title: { display: true, text: '취침 시각', font: { size: 11 } }
+          title: { display: true, text: '就寝時刻', font: { size: 11 } }
         },
-        x: { title: { display: true, text: '요일 (기상일 기준)', font: { size: 11 } } }
+        x: { title: { display: true, text: '曜日（起床日基準）', font: { size: 11 } } }
       }
     }
   });
 })();
 
-/* 2-7b. 요일별 기상 시각 */
+/* 2-7b. 曜日別起床時刻 */
 (() => {
-  const days = ['월', '화', '수', '목', '금', '토', '일'];
+  const days = ['月', '火', '水', '木', '金', '土', '日'];
   const waketime = [7.53, 7.39, 7.46, 7.42, 7.43, 8.03, 8.23];
   const wakeColors = waketime.map((_, i) => i >= 5 ? 'rgba(100,156,255,.7)' : 'rgba(100,100,100,.4)');
 
@@ -692,7 +692,7 @@ function annotationLine(label, value, color='rgba(183,19,19,.6)') {
     data: {
       labels: days,
       datasets: [{
-        label: '기상 시각', data: waketime,
+        label: '起床時刻', data: waketime,
         backgroundColor: wakeColors, borderRadius: 4, barPercentage: 0.55,
       }]
     },
@@ -700,7 +700,7 @@ function annotationLine(label, value, color='rgba(183,19,19,.6)') {
       responsive: true,
       plugins: {
         legend: { display: false },
-        tooltip: { callbacks: { label: ctx => '기상 ' + hToStr(ctx.raw) } },
+        tooltip: { callbacks: { label: ctx => '起床 ' + hToStr(ctx.raw) } },
         annotation: {
           annotations: {
             weekend: {
@@ -711,7 +711,7 @@ function annotationLine(label, value, color='rgba(183,19,19,.6)') {
             avgLine: {
               type: 'line', yMin: 7.62, yMax: 7.62,
               borderColor: 'rgba(183,19,19,.5)', borderWidth: 1, borderDash: [6, 3],
-              label: { display: true, content: '전체 평균 7:37', position: 'start', backgroundColor: 'rgba(183,19,19,.08)', color: '#B71313', font: { size: 10 } }
+              label: { display: true, content: '全体平均 7:37', position: 'start', backgroundColor: 'rgba(183,19,19,.08)', color: '#B71313', font: { size: 10 } }
             }
           }
         }
@@ -720,9 +720,9 @@ function annotationLine(label, value, color='rgba(183,19,19,.6)') {
         y: {
           min: 7.0, max: 8.5,
           ticks: { stepSize: 0.25, callback: function(v) { return hToStr(v); } },
-          title: { display: true, text: '기상 시각', font: { size: 11 } }
+          title: { display: true, text: '起床時刻', font: { size: 11 } }
         },
-        x: { title: { display: true, text: '요일 (기상일 기준)', font: { size: 11 } } }
+        x: { title: { display: true, text: '曜日（起床日基準）', font: { size: 11 } } }
       }
     }
   });
