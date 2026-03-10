@@ -3,118 +3,165 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>일본인 수면 만족도 분석 리포트 v3 | Renight</title>
+<title>일본인 수면 만족도 분석 리포트 v4 | Renight</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css">
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0"></script>
 <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation@3.0.1"></script>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;background:#FAFAFA;color:#1D1E21;line-height:1.7}
-.report-header{background:linear-gradient(135deg,#2C3E5C 0%,#144BDB 50%,#4876EE 100%);color:#fff;padding:3rem 1.5rem;text-align:center}
-.report-header h1{font-size:2rem;font-weight:800;margin-bottom:.5rem;letter-spacing:-.02em}
-.report-header .subtitle{font-size:1rem;opacity:.85;font-weight:400}
-.report-header .brand{font-size:.85rem;opacity:.6;margin-top:.75rem}
-.container{max-width:960px;margin:0 auto;padding:1.5rem}
-.section{background:#fff;border-radius:16px;padding:2rem;margin-bottom:1.5rem;box-shadow:0 1px 3px rgba(0,0,0,.06)}
-.section-title{font-size:1.35rem;font-weight:700;margin-bottom:.25rem;color:#2C3E5C}
-.section-desc{color:#646464;font-size:.9rem;margin-bottom:1.5rem}
-.comparison-summary{display:grid;grid-template-columns:repeat(4,1fr);gap:.75rem;margin-bottom:1.5rem}
+body{font-family:'Pretendard Variable',Pretendard,-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:#1D1E21;color:#BABABA;line-height:1.8;font-size:1.05rem}
+
+/* Header */
+.report-header{background:#1D1E21;color:#fff;padding:6rem 2rem 4rem;position:relative;overflow:hidden}
+.report-header .header-inner{max-width:1080px;margin:0 auto}
+.report-header h1{font-size:5rem;font-weight:900;line-height:1.05;letter-spacing:-.04em;position:relative;margin-bottom:1.5rem}
+.report-header h1 .year{display:block;font-size:6.5rem;letter-spacing:-.06em;background:linear-gradient(135deg,#649CFF,#91ADF5);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.report-header .subtitle{font-size:1.2rem;opacity:.5;font-weight:400;position:relative}
+.report-header .brand{font-size:1rem;opacity:.35;margin-top:1rem;position:relative}
+@media(max-width:640px){.report-header h1{font-size:2.8rem}.report-header h1 .year{font-size:3.5rem}.report-header{padding:4rem 1.5rem 3rem}}
+
+/* Container */
+.container{max-width:1080px;margin:0 auto;padding:2rem}
+
+/* Sections */
+.section{background:#25262A;border-radius:20px;padding:2.5rem;margin-bottom:3rem;box-shadow:0 4px 24px rgba(0,0,0,.3)}
+.section-title{font-size:1.8rem;font-weight:700;margin-bottom:.35rem;color:#FFFFFF}
+.section-desc{color:#7A7A7A;font-size:1.05rem;margin-bottom:2rem}
+
+/* Comparison summary cards */
+.comparison-summary{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-bottom:2rem}
 @media(max-width:640px){.comparison-summary{grid-template-columns:repeat(2,1fr)}}
-.summary-card{text-align:center;padding:1rem;border-radius:10px;background:#F8FAFC}
-.summary-card .label{font-size:.75rem;color:#646464;margin-bottom:.25rem}
-.summary-card .value{font-size:1.5rem;font-weight:800;color:#2C3E5C}
-.summary-card .diff{font-size:.8rem;color:#B71313;margin-top:.15rem}
-.chart-block{margin-bottom:2rem}
+.summary-card{text-align:center;padding:1.25rem;border-radius:14px;background:#1D1E21;position:relative;overflow:hidden}
+.summary-card::before{content:'';position:absolute;inset:0;border-radius:14px;padding:1px;background:linear-gradient(135deg,rgba(100,156,255,.3),rgba(72,118,238,.1));-webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);-webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none}
+.summary-card .label{font-size:.9rem;color:#7A7A7A;margin-bottom:.35rem}
+.summary-card .value{font-size:1.7rem;font-weight:800;color:#FFFFFF}
+.summary-card .diff{font-size:.95rem;color:#B71313;margin-top:.2rem}
+
+/* Chart blocks */
+.chart-block{margin-bottom:2.5rem}
 .chart-block:last-child{margin-bottom:0}
-.chart-title{font-size:1.05rem;font-weight:700;margin-bottom:.25rem}
-.chart-wrap{position:relative;margin:1rem 0}
-.insight-box{background:linear-gradient(135deg,#DAE4FC,#B6C8F8);border-radius:10px;padding:.75rem 1rem;font-size:.9rem;color:#2C3E5C;border-left:4px solid #4876EE;margin-top:.75rem}
-.insight-box strong{font-weight:700}
-.special-insight{border-radius:12px;padding:1.25rem 1.5rem;margin-top:1.25rem;position:relative;overflow:hidden}
+.chart-title{font-size:1.3rem;font-weight:700;margin-bottom:.35rem;color:#FFFFFF}
+.chart-wrap{position:relative;margin:1.25rem 0}
+
+/* Insight box */
+.insight-box{background:rgba(100,156,255,.1);border-radius:14px;padding:1rem 1.25rem;font-size:1.05rem;color:#BABABA;border-left:4px solid #649CFF;margin-top:1rem}
+.insight-box strong{font-weight:700;color:#FFFFFF}
+
+/* Special insights */
+.special-insight{border-radius:14px;padding:1.5rem 1.75rem;margin-top:1.5rem;position:relative;overflow:hidden}
 .special-insight::before{content:'';position:absolute;top:0;left:0;width:5px;height:100%}
-.special-insight .si-title{font-size:1.1rem;font-weight:800;margin-bottom:.5rem;display:flex;align-items:center;gap:.5rem}
-.special-insight .si-body{font-size:.9rem;line-height:1.7}
-.special-insight .si-stat{display:inline-block;background:rgba(255,255,255,.6);border-radius:6px;padding:.15rem .5rem;font-weight:700;margin:0 .1rem}
-.si-7wall{background:linear-gradient(135deg,#C0D5FF,#DAE4FC)}
-.si-7wall::before{background:#3B82FF}
-.si-7wall .si-title{color:#2C3E5C}
-.si-7wall .si-stat{color:#2C3E5C}
-.si-alcohol{background:linear-gradient(135deg,#FEF2F2,#FEE2E2)}
+.special-insight .si-title{font-size:1.3rem;font-weight:800;margin-bottom:.6rem;display:flex;align-items:center;gap:.5rem}
+.special-insight .si-body{font-size:1.05rem;line-height:1.8}
+.special-insight .si-stat{display:inline-block;background:rgba(255,255,255,.1);border-radius:6px;padding:.15rem .5rem;font-weight:700;margin:0 .1rem}
+
+.si-7wall{background:rgba(59,130,255,.1)}
+.si-7wall::before{background:#649CFF}
+.si-7wall .si-title{color:#649CFF}
+.si-7wall .si-stat{color:#649CFF}
+
+.si-alcohol{background:rgba(183,19,19,.08)}
 .si-alcohol::before{background:#B71313}
-.si-alcohol .si-title{color:#7F1D1D}
-.si-alcohol .si-stat{color:#7F1D1D}
-.si-caffeine{background:linear-gradient(135deg,#FFF7ED,#FFEDD5)}
+.si-alcohol .si-title{color:#B71313}
+.si-alcohol .si-stat{color:#B71313}
+
+.si-caffeine{background:rgba(245,131,143,.08)}
 .si-caffeine::before{background:#F5838F}
-.si-caffeine .si-title{color:#9A3412}
-.si-caffeine .si-stat{color:#9A3412}
-.si-awake{background:linear-gradient(135deg,#C0D5FF,#DAE4FC)}
-.si-awake::before{background:#3B82FF}
-.si-awake .si-title{color:#2C3E5C}
-.si-awake .si-stat{color:#2C3E5C}
-.si-awake .si-body .cite{font-size:.78rem;color:#646464;margin-top:.75rem;font-style:italic}
-.si-weekend{background:linear-gradient(135deg,#B6C8F8,#DAE4FC)}
+.si-caffeine .si-title{color:#F5838F}
+.si-caffeine .si-stat{color:#F5838F}
+
+.si-awake{background:rgba(100,156,255,.1)}
+.si-awake::before{background:#649CFF}
+.si-awake .si-title{color:#649CFF}
+.si-awake .si-stat{color:#649CFF}
+.si-awake .si-body .cite{font-size:.92rem;color:#7A7A7A;margin-top:.75rem;font-style:italic}
+
+.si-weekend{background:rgba(72,118,238,.1)}
 .si-weekend::before{background:#4876EE}
-.si-weekend .si-title{color:#2C3E5C}
-.si-weekend .si-stat{color:#2C3E5C}
-.rec-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.si-weekend .si-title{color:#649CFF}
+.si-weekend .si-stat{color:#649CFF}
+
+/* Recommendation grid */
+.rec-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem}
 @media(max-width:640px){.rec-grid{grid-template-columns:1fr}}
-.rec-card{border:1px solid #E5E5E5;border-radius:12px;padding:1.25rem;border-left:4px solid #3B82FF;transition:box-shadow .2s}
-.rec-card:hover{box-shadow:0 4px 12px rgba(0,0,0,.08)}
+.rec-card{background:#1D1E21;border:1px solid rgba(255,255,255,.06);border-radius:14px;padding:1.5rem;border-left:4px solid #649CFF;transition:box-shadow .2s}
+.rec-card:hover{box-shadow:0 4px 20px rgba(100,156,255,.15)}
 .rec-card.caution{border-left-color:#B71313}
-.rec-title{font-size:1rem;font-weight:700;margin-bottom:.5rem}
-.rec-evidence{font-size:.85rem;color:#646464;margin-bottom:.5rem}
-.rec-evidence .num{color:#4876EE;font-weight:700}
-.rec-action{font-size:.85rem;background:#DAE4FC;border-radius:6px;padding:.5rem .75rem;color:#2C3E5C}
-.rec-card.caution .rec-action{background:#FEF2F2;color:#7F1D1D}
-.sub-section-note{font-size:.82rem;color:#7A7A7A;margin-bottom:.5rem}
-.comp-table{width:100%;border-collapse:collapse;border-radius:12px;overflow:hidden;border:1px solid #E5E5E5;font-size:.92rem}
-.comp-table th,.comp-table td{padding:.65rem .75rem;text-align:center;border-bottom:1px solid #E5E5E5}
-.comp-table th{background:#F8FAFC;font-weight:700;font-size:.85rem}
-.comp-table th.hl{background:#DAE4FC;color:#4876EE}
-.comp-table td.hl{background:#DAE4FC;font-weight:600}
-.comp-table .row-label{text-align:left;font-weight:600;background:#F8FAFC}
-.weekday-cards{display:grid;grid-template-columns:1fr auto 1fr;gap:.75rem;align-items:center;margin-bottom:1.5rem}
+.rec-title{font-size:1.15rem;font-weight:700;margin-bottom:.6rem;color:#FFFFFF}
+.rec-evidence{font-size:1rem;color:#7A7A7A;margin-bottom:.6rem}
+.rec-evidence .num{color:#649CFF;font-weight:700}
+.rec-action{font-size:1rem;background:rgba(100,156,255,.1);border-radius:8px;padding:.6rem .9rem;color:#BABABA}
+.rec-card.caution .rec-action{background:rgba(183,19,19,.1);color:#FFA6AF}
+
+/* Sub section note */
+.sub-section-note{font-size:.95rem;color:#7A7A7A;margin-bottom:.6rem}
+
+/* Comparison table */
+.comp-table{width:100%;border-collapse:collapse;border-radius:14px;overflow:hidden;border:1px solid rgba(255,255,255,.08);font-size:1.05rem}
+.comp-table th,.comp-table td{padding:.8rem .9rem;text-align:center;border-bottom:1px solid rgba(255,255,255,.06)}
+.comp-table th{background:#1D1E21;font-weight:700;font-size:1rem;color:#BABABA}
+.comp-table th.hl{background:rgba(100,156,255,.15);color:#649CFF}
+.comp-table td.hl{background:rgba(100,156,255,.08);font-weight:600;color:#FFFFFF}
+.comp-table .row-label{text-align:left;font-weight:600;background:#1D1E21;color:#BABABA}
+
+/* Weekday cards */
+.weekday-cards{display:grid;grid-template-columns:1fr auto 1fr;gap:1rem;align-items:center;margin-bottom:2rem}
 @media(max-width:640px){.weekday-cards{grid-template-columns:1fr}}
-.wd-card{text-align:center;padding:1rem;border-radius:12px}
-.wd-card.weekday{background:#F8FAFC}
-.wd-card.weekend{background:#DAE4FC}
-.wd-card .wd-label{font-size:.8rem;color:#646464;margin-bottom:.35rem}
-.wd-card .wd-value{font-size:1.3rem;font-weight:800;color:#2C3E5C}
-.wd-card .wd-sub{font-size:.85rem;color:#646464;margin-top:.15rem}
-.wd-vs{font-size:1.2rem;font-weight:800;color:#BABABA}
-.section-intro{background:#F8FAFC;border-radius:12px;padding:1.25rem 1.5rem;margin-bottom:1.5rem;border-left:4px solid #7A7A7A}
-.section-intro h3{font-size:1.05rem;font-weight:700;color:#25262A;margin-bottom:.5rem}
-.section-intro p{font-size:.9rem;color:#3A3A3A;margin:0}
-.intro-section{background:#fff;border-radius:16px;padding:2rem;margin-bottom:1.5rem;box-shadow:0 1px 3px rgba(0,0,0,.06)}
-.intro-section h2{font-size:1.35rem;font-weight:700;color:#2C3E5C;margin-bottom:1rem}
-.intro-section h3{font-size:1.05rem;font-weight:700;color:#2C3E5C;margin:1.5rem 0 .5rem}
-.intro-section p{font-size:.9rem;color:#3A3A3A;margin-bottom:.75rem}
-.intro-section .slogan{font-size:.95rem;color:#4876EE;font-weight:600;line-height:1.8;margin:.75rem 0;padding:.75rem 1rem;background:#DAE4FC;border-radius:8px}
-.intro-section .highlights{display:flex;flex-wrap:wrap;gap:.5rem;margin:.75rem 0}
-.intro-section .highlights span{background:#DAE4FC;color:#2C3E5C;font-size:.82rem;font-weight:600;padding:.35rem .75rem;border-radius:20px}
-.intro-overview{width:100%;border-collapse:collapse;border-radius:10px;overflow:hidden;border:1px solid #E5E5E5;font-size:.88rem;margin-top:.75rem}
-.intro-overview th,.intro-overview td{padding:.55rem .75rem;border-bottom:1px solid #E5E5E5}
-.intro-overview th{background:#DAE4FC;color:#2C3E5C;font-weight:700;text-align:left;width:35%}
-.intro-overview td{color:#3A3A3A}
-sup{font-size:.7em;color:#4876EE;font-weight:600;cursor:default}
-.references{background:#fff;border-radius:16px;padding:2rem;margin-bottom:1.5rem;box-shadow:0 1px 3px rgba(0,0,0,.06)}
-.references h2{font-size:1.1rem;font-weight:700;color:#2C3E5C;margin-bottom:1rem}
-.references ol{padding-left:1.5rem;font-size:.82rem;color:#3A3A3A;line-height:1.8}
-.references ol li{margin-bottom:.5rem}
+.wd-card{text-align:center;padding:1.25rem;border-radius:14px}
+.wd-card.weekday{background:#1D1E21}
+.wd-card.weekend{background:rgba(100,156,255,.12)}
+.wd-card .wd-label{font-size:.95rem;color:#7A7A7A;margin-bottom:.4rem}
+.wd-card .wd-value{font-size:1.5rem;font-weight:800;color:#FFFFFF}
+.wd-card .wd-sub{font-size:1rem;color:#7A7A7A;margin-top:.2rem}
+.wd-vs{font-size:1.4rem;font-weight:800;color:#646464}
+
+/* Section intro */
+.section-intro{background:#1D1E21;border-radius:14px;padding:1.5rem 1.75rem;margin-bottom:2rem;border-left:4px solid #646464}
+.section-intro h3{font-size:1.2rem;font-weight:700;color:#FFFFFF;margin-bottom:.6rem}
+.section-intro p{font-size:1.05rem;color:#BABABA;margin:0}
+
+/* Intro section */
+.intro-section{background:#25262A;border-radius:20px;padding:2.5rem;margin-bottom:3rem;box-shadow:0 4px 24px rgba(0,0,0,.3)}
+.intro-section h2{font-size:1.8rem;font-weight:700;color:#FFFFFF;margin-bottom:1.25rem}
+.intro-section h3{font-size:1.2rem;font-weight:700;color:#FFFFFF;margin:1.75rem 0 .6rem}
+.intro-section p{font-size:1.05rem;color:#BABABA;margin-bottom:.9rem}
+.intro-section .slogan{font-size:1.1rem;color:#649CFF;font-weight:600;line-height:1.9;margin:1rem 0;padding:1rem 1.25rem;background:rgba(100,156,255,.1);border-radius:10px}
+.intro-section .highlights{display:flex;flex-wrap:wrap;gap:.6rem;margin:1rem 0}
+.intro-section .highlights span{background:rgba(100,156,255,.15);color:#649CFF;font-size:.95rem;font-weight:600;padding:.4rem .85rem;border-radius:20px}
+
+/* Intro overview table */
+.intro-overview{width:100%;border-collapse:collapse;border-radius:12px;overflow:hidden;border:1px solid rgba(255,255,255,.08);font-size:1.02rem;margin-top:1rem}
+.intro-overview th,.intro-overview td{padding:.65rem .85rem;border-bottom:1px solid rgba(255,255,255,.06)}
+.intro-overview th{background:rgba(100,156,255,.12);color:#649CFF;font-weight:700;text-align:left;width:35%}
+.intro-overview td{color:#BABABA}
+
+/* Sup references */
+sup{font-size:.7em;color:#649CFF;font-weight:600;cursor:default}
+
+/* References */
+.references{background:#25262A;border-radius:20px;padding:2.5rem;margin-bottom:3rem;box-shadow:0 4px 24px rgba(0,0,0,.3)}
+.references h2{font-size:1.3rem;font-weight:700;color:#FFFFFF;margin-bottom:1.25rem}
+.references ol{padding-left:1.5rem;font-size:.95rem;color:#7A7A7A;line-height:1.9}
+.references ol li{margin-bottom:.6rem}
 .references ol li em{font-style:italic}
-footer{text-align:center;padding:2rem;color:#7A7A7A;font-size:.8rem}
+
+/* Footer */
+footer{text-align:center;padding:2.5rem;color:#646464;font-size:.95rem}
+
+/* Mobile */
 @media(max-width:640px){
-  .report-header h1{font-size:1.5rem}
-  .section{padding:1.25rem}
-  .intro-section{padding:1.25rem}
+  .section{padding:1.5rem}
+  .intro-section{padding:1.5rem}
 }
 </style>
 </head>
 <body>
 
 <header class="report-header">
-  <h1>일본인 수면 만족도 분석</h1>
-  <p class="subtitle">Renight 수면 데이터 분석 &middot; 2025.02 ~ 2026.02</p>
-  <p class="brand">Renight &mdash; 밤을 회복의 시간으로</p>
+  <div class="header-inner">
+    <h1><span class="year">2026</span>Renight<br>World Sleep Day<br>Report</h1>
+    <p class="subtitle">일본인 수면 만족도 분석 &middot; 2025.02 ~ 2026.02</p>
+    <p class="brand">당신의 하루가 매일 다시 시작하는 곳</p>
+  </div>
 </header>
 
 <main class="container">
@@ -181,7 +228,7 @@ footer{text-align:center;padding:2rem;color:#7A7A7A;font-size:.8rem}
     </tbody>
   </table>
 
-  <div class="insight-box" style="margin-top:1.25rem">
+  <div class="insight-box" style="margin-top:1.5rem">
     일본인은 일본 외 유저에 비해 27분 일찍 잠자리에 들고, 40분 더 일찍 일어납니다. 수면 시간은 21분 짧고, 수면 만족도도 0.53점 낮습니다.
   </div>
 </div>
@@ -201,7 +248,7 @@ footer{text-align:center;padding:2rem;color:#7A7A7A;font-size:.8rem}
   <div class="chart-block">
     <h3 class="chart-title">2-1. 수면 시간에 따른 만족도</h3>
     <p class="sub-section-note">수면 시간을 30분 단위로 나누고, 각 구간의 평균 만족도를 계산했습니다. 빨간색은 7시간 미만, 파란색은 7시간 이상입니다. 점선은 일본인 전체 평균(6.67점)을 나타냅니다.</p>
-    <div class="chart-wrap"><canvas id="chartDur" height="150"></canvas></div>
+    <div class="chart-wrap"><canvas id="chartDur" height="200"></canvas></div>
     <div class="insight-box">
       National Sleep Foundation에 따르면 나이대에 따라 조금씩 다르지만 대체로 권장 수면시간을 7-9시간이라고 합니다.<sup>(3)</sup> 권장 수면시간의 최소점인 7시간을 넘겼을 때부터 평균보다 자신의 수면에 만족하는 경향을 보입니다. 수면에 대한 만족도는 수면 시간이 증가할수록 올라가는 선형 관계를 보이고 있습니다.
     </div>
@@ -217,7 +264,7 @@ footer{text-align:center;padding:2rem;color:#7A7A7A;font-size:.8rem}
   <div class="chart-block">
     <h3 class="chart-title">2-2. 취침 시각에 따른 만족도</h3>
     <p class="sub-section-note">취침 시각을 1시간 단위로 나누어 만족도를 비교했습니다. 20시~4시 범위를 표시하며, 파란색은 만족도가 높은 시간대(20~22시)입니다. 일본인이 가장 많이 잠드는 시각은 0시이지만, 만족도가 가장 높은 시각은 21시입니다.</p>
-    <div class="chart-wrap"><canvas id="chartBed" height="140"></canvas></div>
+    <div class="chart-wrap"><canvas id="chartBed" height="190"></canvas></div>
     <div class="insight-box">
       자정 이전에 잠드는 경우 가장 만족한다고 하며, 취침시각이 늦어질수록 만족도가 일관되게 하락합니다. 취침시각이 23시대에서 0시대로 변할 경우 감소폭이 가장 큽니다.(-0.12)
     </div>
@@ -227,7 +274,7 @@ footer{text-align:center;padding:2rem;color:#7A7A7A;font-size:.8rem}
   <div class="chart-block">
     <h3 class="chart-title">2-3. 기상 시각에 따른 만족도</h3>
     <p class="sub-section-note">기상 시각별 만족도를 비교했습니다. 일본인의 과반수가 6~7시에 기상하지만, 늦게 일어날수록 만족도가 높아지는 경향이 있습니다.</p>
-    <div class="chart-wrap"><canvas id="chartWake" height="140"></canvas></div>
+    <div class="chart-wrap"><canvas id="chartWake" height="190"></canvas></div>
     <div class="insight-box">
       대체로 기상 시각이 늦어질수록 만족한다고 하며, 기상시각을 7시에서 8시로 늦췄을 때와 8시에서 9시로 늦췄을 때 가장 큰 증가폭을 보입니다.
     </div>
@@ -237,7 +284,7 @@ footer{text-align:center;padding:2rem;color:#7A7A7A;font-size:.8rem}
   <div class="chart-block">
     <h3 class="chart-title">2-4. 수면 전 활동에 따른 만족도</h3>
     <p class="sub-section-note">Renight 사용자가 잠들기 전 기록한 15가지 활동별 수면 만족도입니다. 파란색은 평균보다 높은 활동, 빨간색은 평균보다 낮은 활동입니다.</p>
-    <div class="chart-wrap"><canvas id="chartActivity" height="210"></canvas></div>
+    <div class="chart-wrap"><canvas id="chartActivity" height="290"></canvas></div>
     <div class="insight-box">
       신체 활동이 수면 만족도와 가장 강한 양의 상관관계를 보입니다. 운동(6.95)과 산책(6.93)이 만족도 1, 2위이며, 스트레칭(6.82)과 일기쓰기(6.82)가 그 뒤를 잇습니다. 반면 음주(6.46)와 니코틴(6.45)은 만족도 최하위로, 평균 대비 약 -0.21점 낮습니다.
     </div>
@@ -266,7 +313,7 @@ footer{text-align:center;padding:2rem;color:#7A7A7A;font-size:.8rem}
   <div class="chart-block">
     <h3 class="chart-title">2-5. 수면 전 감정에 따른 만족도</h3>
     <p class="sub-section-note">잠들기 전 기록한 감정 상태별 수면 만족도입니다. 긍정적 감정(파란색)과 부정적 감정(빨간색)으로 나뉘며, 감정 상태가 수면의 질에 미치는 영향은 수면 시간 못지않게 큽니다.</p>
-    <div class="chart-wrap"><canvas id="chartMood" height="160"></canvas></div>
+    <div class="chart-wrap"><canvas id="chartMood" height="220"></canvas></div>
     <div class="insight-box">
       긍정적 감정과 부정적 감정 사이에 뚜렷한 만족도 격차가 나타납니다. 행복(7.09)과 기쁨(7.08)이 가장 높고, 우울(6.28)과 스트레스(6.41)가 가장 낮습니다. 행복한 밤과 우울한 밤의 만족도 차이는 0.81점으로, 이는 5시간 수면과 7시간 수면의 만족도 차이와 비슷한 수준입니다.
     </div>
@@ -281,7 +328,7 @@ footer{text-align:center;padding:2rem;color:#7A7A7A;font-size:.8rem}
   </div>
 
   <!-- 2-6 주중 vs 주말 -->
-  <div class="chart-block" style="margin-top:2rem">
+  <div class="chart-block" style="margin-top:2.5rem">
     <h3 class="chart-title">2-6. 주중 vs 주말 수면 시간 및 만족도</h3>
     <p class="sub-section-note">요일별 수면 시간(막대)과 만족도(빨간 선)를 동시에 표시했습니다. 연파란 배경이 주말(토·일)입니다.</p>
 
@@ -299,7 +346,7 @@ footer{text-align:center;padding:2rem;color:#7A7A7A;font-size:.8rem}
       </div>
     </div>
 
-    <div class="chart-wrap"><canvas id="chartWeekday" height="140"></canvas></div>
+    <div class="chart-wrap"><canvas id="chartWeekday" height="190"></canvas></div>
 
     <div class="insight-box">
       평균적으로 주말에 더 길고(+17분), 더 만족스럽게(+0.21) 수면하고 있습니다. 이는 주중에 부족한 잠을 주말에 보상하려는 경향으로 볼 수 있으며, 수면시간이 길어질수록 수면 만족도가 증가하는 경향과 일치합니다.
@@ -307,12 +354,12 @@ footer{text-align:center;padding:2rem;color:#7A7A7A;font-size:.8rem}
   </div>
 
   <!-- 2-7 취침/기상 시각 -->
-  <div class="chart-block" style="margin-top:2rem">
+  <div class="chart-block" style="margin-top:2.5rem">
     <h3 class="chart-title">2-7. 주중 vs 주말 취침시각과 기상시각 비교</h3>
     <p class="sub-section-note">요일별 평균 취침 시각과 기상 시각을 각각 표시했습니다.</p>
 
-    <div class="chart-wrap"><canvas id="chartBedtimeByDay" height="140"></canvas></div>
-    <div class="chart-wrap"><canvas id="chartWaketimeByDay" height="140"></canvas></div>
+    <div class="chart-wrap"><canvas id="chartBedtimeByDay" height="190"></canvas></div>
+    <div class="chart-wrap"><canvas id="chartWaketimeByDay" height="190"></canvas></div>
 
     <div class="insight-box">
       주말에는 취침이 늦어지고 기상도 늦어져, 수면 시간대 전체가 뒤로 이동한다. 주중에 못 잤던 만큼 주말에 만회하려 노력하지만 주중과 주말의 취침&amp;기상시각 격차가 클수록 오히려 피곤해진다.
@@ -375,10 +422,10 @@ footer{text-align:center;padding:2rem;color:#7A7A7A;font-size:.8rem}
       <div class="rec-action">감정 상태가 수면 만족도에 미치는 영향은 수면 시간 2시간 차이와 동일. 취침 전 감사한 일 3가지를 떠올려 보세요.</div>
     </div>
 
-    <div class="rec-card" style="border-left-color:#4876EE">
-      <div class="rec-title" style="color:#4876EE">&#x1F3AF; 가장 효과적인 조합</div>
+    <div class="rec-card" style="border-left-color:#649CFF">
+      <div class="rec-title" style="color:#649CFF">&#x1F3AF; 가장 효과적인 조합</div>
       <div class="rec-evidence">22시 이전 취침 + 7시간 이상 수면 + 저녁 산책/운동 + 긍정적 감정</div>
-      <div class="rec-action" style="background:#DAE4FC;color:#2C3E5C">예상 만족도 <strong>7.2점 이상</strong> (현재 일본 평균 6.67 대비 +0.53점)</div>
+      <div class="rec-action" style="background:rgba(100,156,255,.15);color:#BABABA">예상 만족도 <strong>7.2점 이상</strong> (현재 일본 평균 6.67 대비 +0.53점)</div>
     </div>
   </div>
 </div>
@@ -404,25 +451,47 @@ footer{text-align:center;padding:2rem;color:#7A7A7A;font-size:.8rem}
 
 <script>
 const JP_AVG = 6.67;
-Chart.defaults.font.family = "-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif";
+Chart.defaults.font.family = "'Pretendard Variable',Pretendard,-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif";
+Chart.defaults.font.size = 13;
+Chart.defaults.color = '#7A7A7A';
+const GRID_COLOR = 'rgba(255,255,255,0.15)';
+const GRID_OPT = { color: GRID_COLOR, drawOnChartArea: true, display: true };
+Chart.defaults.animation = { duration: 1200, easing: 'easeOutQuart' };
 
-function annotationLine(label, value, color='rgba(183,19,19,.6)') {
+const chartQueue = [];
+function registerChart(canvasId, createFn) {
+  chartQueue.push({ canvasId, createFn, created: false });
+}
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const item = chartQueue.find(c => c.canvasId === entry.target.id && !c.created);
+      if (item) { item.created = true; item.createFn(); observer.unobserve(entry.target); }
+    }
+  });
+}, { threshold: 0.15 });
+chartQueue.observe = () => chartQueue.forEach(c => {
+  const el = document.getElementById(c.canvasId);
+  if (el) observer.observe(el);
+});
+
+function annotationLine(label, value, color='rgba(183,19,19,.7)') {
   return {
     type:'line', yMin:value, yMax:value,
     borderColor:color, borderWidth:1.5, borderDash:[6,3],
     label:{ display:true, content:label, position:'start',
-            backgroundColor:color, color:'#fff', font:{size:10,weight:'bold'},
+            backgroundColor:color, color:'#fff', font:{size:11,weight:'bold'},
             padding:{top:2,bottom:2,left:4,right:4}, borderRadius:3 }
   };
 }
 
 /* 2-1. 수면 시간 vs 만족도 */
-(() => {
+registerChart('chartDur', () => {
   const labels = ['3.0h', '3.5h', '4.0h', '4.5h', '5.0h', '5.5h', '6.0h', '6.5h', '7.0h', '7.5h', '8.0h', '8.5h', '9.0h', '9.5h', '10.0h'];
   const data = [6.13, 6.2, 6.2, 6.27, 6.39, 6.47, 6.58, 6.67, 6.83, 6.92, 7.04, 7.12, 7.19, 7.2, 7.29];
   const colors = data.map((v,i) => {
     const h = parseFloat(labels[i]);
-    return h >= 7 ? 'rgba(59,130,255,.7)' : 'rgba(183,19,19,.45)';
+    return h >= 7 ? 'rgba(100,156,255,.85)' : 'rgba(183,19,19,.55)';
   });
 
   new Chart(document.getElementById('chartDur'), {
@@ -437,29 +506,29 @@ function annotationLine(label, value, color='rgba(183,19,19,.6)') {
             avg: annotationLine('일본 평균 '+JP_AVG, JP_AVG),
             wall:{
               type:'box', xMin:7.5, xMax:8.5,
-              backgroundColor:'rgba(59,130,255,.08)', borderColor:'rgba(59,130,255,.3)',
+              backgroundColor:'rgba(100,156,255,.08)', borderColor:'rgba(100,156,255,.3)',
               borderWidth:1, borderDash:[4,4],
               label:{ display:true, content:'7시간의 벽', position:{x:'center',y:'start'},
-                      color:'#2C3E5C', font:{size:10,weight:'bold'} }
+                      color:'#649CFF', font:{size:11,weight:'bold'} }
             }
           }
         }
       },
       scales:{
-        y:{min:6.0, max:7.4, ticks:{callback:v=>v.toFixed(1)},
-           title:{display:true, text:'수면 만족도 (10점)', font:{size:11}}},
-        x:{title:{display:true, text:'수면 시간', font:{size:11}}}
+        y:{min:6.0, max:7.4, ticks:{callback:v=>v.toFixed(1)}, grid:GRID_OPT,
+           title:{display:true, text:'수면 만족도 (10점)', font:{size:12}}},
+        x:{grid:{display:false}, title:{display:true, text:'수면 시간', font:{size:12}}}
       }
     }
   });
-})();
+});
 
 /* 2-2. 취침 시각 vs 만족도 */
-(() => {
+registerChart('chartBed', () => {
   const labels = ['20시', '21시', '22시', '23시', '0시', '1시', '2시', '3시', '4시'];
   const data = [6.81, 6.86, 6.84, 6.8, 6.68, 6.6, 6.55, 6.52, 6.52];
   const hours = [20, 21, 22, 23, 0, 1, 2, 3, 4];
-  const colors = hours.map(h => h >= 20 && h <= 23 ? 'rgba(72,118,238,.75)' : 'rgba(122,122,122,.35)');
+  const colors = hours.map(h => h >= 20 && h <= 23 ? 'rgba(100,156,255,.85)' : 'rgba(122,122,122,.4)');
 
   new Chart(document.getElementById('chartBed'), {
     type:'bar',
@@ -471,20 +540,20 @@ function annotationLine(label, value, color='rgba(183,19,19,.6)') {
         annotation:{annotations:{ avg: annotationLine('일본 평균 '+JP_AVG, JP_AVG) }}
       },
       scales:{
-        y:{min:6.4, max:7.0, ticks:{callback:v=>v.toFixed(1)},
-           title:{display:true, text:'수면 만족도 (10점)', font:{size:11}}},
-        x:{title:{display:true, text:'취침 시각', font:{size:11}}}
+        y:{min:6.4, max:7.0, ticks:{callback:v=>v.toFixed(1)}, grid:GRID_OPT,
+           title:{display:true, text:'수면 만족도 (10점)', font:{size:12}}},
+        x:{grid:{display:false}, title:{display:true, text:'취침 시각', font:{size:12}}}
       }
     }
   });
-})();
+});
 
 /* 2-3. 기상 시각 vs 만족도 */
-(() => {
+registerChart('chartWake', () => {
   const labels = ['4시', '5시', '6시', '7시', '8시', '9시', '10시', '11시', '12시'];
   const data = [6.45, 6.53, 6.61, 6.62, 6.76, 6.89, 6.95, 6.96, 6.97];
   const hours = [4, 5, 6, 7, 8, 9, 10, 11, 12];
-  const colors = hours.map(h => h >= 8 ? 'rgba(72,118,238,.75)' : 'rgba(122,122,122,.35)');
+  const colors = hours.map(h => h >= 8 ? 'rgba(100,156,255,.85)' : 'rgba(122,122,122,.4)');
 
   new Chart(document.getElementById('chartWake'), {
     type:'bar',
@@ -496,23 +565,23 @@ function annotationLine(label, value, color='rgba(183,19,19,.6)') {
         annotation:{annotations:{ avg: annotationLine('일본 평균 '+JP_AVG, JP_AVG) }}
       },
       scales:{
-        y:{min:6.3, max:7.1, ticks:{callback:v=>v.toFixed(1)},
-           title:{display:true, text:'수면 만족도 (10점)', font:{size:11}}},
-        x:{title:{display:true, text:'기상 시각', font:{size:11}}}
+        y:{min:6.3, max:7.1, ticks:{callback:v=>v.toFixed(1)}, grid:GRID_OPT,
+           title:{display:true, text:'수면 만족도 (10점)', font:{size:12}}},
+        x:{grid:{display:false}, title:{display:true, text:'기상 시각', font:{size:12}}}
       }
     }
   });
-})();
+});
 
 /* 2-4. 활동별 만족도 */
-(() => {
+registerChart('chartActivity', () => {
   const labels = ['운동', '산책', '일기쓰기', '스트레칭', '독서', '게임', '낮잠', '샤워', '야식', '업무/공부', '스마트폰', 'TV 시청', '커피', '음주', '니코틴'];
   const data = [6.95, 6.93, 6.82, 6.82, 6.79, 6.77, 6.71, 6.71, 6.7, 6.7, 6.67, 6.62, 6.58, 6.46, 6.45];
   const colors = data.map(v => {
-    if (v >= 6.8) return 'rgba(59,130,255,.7)';
-    if (v >= JP_AVG) return 'rgba(72,118,238,.5)';
-    if (v >= 6.5) return 'rgba(122,122,122,.35)';
-    return 'rgba(183,19,19,.5)';
+    if (v >= 6.8) return 'rgba(100,156,255,.85)';
+    if (v >= JP_AVG) return 'rgba(100,156,255,.55)';
+    if (v >= 6.5) return 'rgba(122,122,122,.4)';
+    return 'rgba(183,19,19,.6)';
   });
 
   new Chart(document.getElementById('chartActivity'), {
@@ -525,28 +594,28 @@ function annotationLine(label, value, color='rgba(183,19,19,.6)') {
         annotation:{annotations:{
           avg:{
             type:'line', xMin:JP_AVG, xMax:JP_AVG,
-            borderColor:'rgba(183,19,19,.6)', borderWidth:1.5, borderDash:[6,3],
+            borderColor:'rgba(183,19,19,.7)', borderWidth:1.5, borderDash:[6,3],
             label:{ display:true, content:'평균 '+JP_AVG, position:'start',
-                    backgroundColor:'rgba(183,19,19,.6)', color:'#fff',
-                    font:{size:10,weight:'bold'},
+                    backgroundColor:'rgba(183,19,19,.7)', color:'#fff',
+                    font:{size:11,weight:'bold'},
                     padding:{top:2,bottom:2,left:4,right:4}, borderRadius:3 }
           }
         }}
       },
       scales:{
-        x:{min:6.2, max:7.1, ticks:{callback:v=>v.toFixed(1)},
-           title:{display:true, text:'수면 만족도 (10점)', font:{size:11}}},
-        y:{ticks:{font:{size:12}}}
+        x:{min:6.2, max:7.1, ticks:{callback:v=>v.toFixed(1)}, grid:GRID_OPT,
+           title:{display:true, text:'수면 만족도 (10점)', font:{size:12}}},
+        y:{ticks:{font:{size:13}}, grid:{display:false}}
       }
     }
   });
-})();
+});
 
 /* 2-5. 감정별 만족도 */
-(() => {
+registerChart('chartMood', () => {
   const labels = ['행복', '기쁨', '만족', '설렘', '편안함', '긴장', '불안', '슬픔', '스트레스', '우울'];
   const data = [7.09, 7.08, 7.05, 7.0, 6.87, 6.49, 6.44, 6.43, 6.41, 6.28];
-  const colors = data.map(v => v >= JP_AVG ? 'rgba(72,118,238,.7)' : 'rgba(183,19,19,.45)');
+  const colors = data.map(v => v >= JP_AVG ? 'rgba(100,156,255,.85)' : 'rgba(183,19,19,.55)');
 
   new Chart(document.getElementById('chartMood'), {
     type:'bar',
@@ -558,25 +627,25 @@ function annotationLine(label, value, color='rgba(183,19,19,.6)') {
         annotation:{annotations:{
           avg:{
             type:'line', xMin:JP_AVG, xMax:JP_AVG,
-            borderColor:'rgba(183,19,19,.6)', borderWidth:1.5, borderDash:[6,3],
+            borderColor:'rgba(183,19,19,.7)', borderWidth:1.5, borderDash:[6,3],
             label:{ display:true, content:'평균 '+JP_AVG, position:'start',
-                    backgroundColor:'rgba(183,19,19,.6)', color:'#fff',
-                    font:{size:10,weight:'bold'},
+                    backgroundColor:'rgba(183,19,19,.7)', color:'#fff',
+                    font:{size:11,weight:'bold'},
                     padding:{top:2,bottom:2,left:4,right:4}, borderRadius:3 }
           }
         }}
       },
       scales:{
-        x:{min:6.0, max:7.2, ticks:{callback:v=>v.toFixed(1)},
-           title:{display:true, text:'수면 만족도 (10점)', font:{size:11}}},
-        y:{ticks:{font:{size:12}}}
+        x:{min:6.0, max:7.2, ticks:{callback:v=>v.toFixed(1)}, grid:GRID_OPT,
+           title:{display:true, text:'수면 만족도 (10점)', font:{size:12}}},
+        y:{ticks:{font:{size:13}}, grid:{display:false}}
       }
     }
   });
-})();
+});
 
 /* 2-6. 요일별 패턴 */
-(() => {
+registerChart('chartWeekday', () => {
   const days = ['월', '화', '수', '목', '금', '토', '일'];
   const dur = [6.766, 6.511, 6.569, 6.517, 6.481, 6.789, 6.9];
   const rat = [6.63, 6.61, 6.62, 6.61, 6.62, 6.8, 6.85];
@@ -587,7 +656,7 @@ function annotationLine(label, value, color='rgba(183,19,19,.6)') {
       labels: days,
       datasets:[
         {
-          label:'수면 시간(h)', data:dur, backgroundColor: dur.map((_,i)=> i>=5 ? 'rgba(72,118,238,.7)' : 'rgba(122,122,122,.35)'),
+          label:'수면 시간(h)', data:dur, backgroundColor: dur.map((_,i)=> i>=5 ? 'rgba(100,156,255,.85)' : 'rgba(122,122,122,.4)'),
           borderRadius:4, yAxisID:'yDur', barPercentage:.55, order:2
         },
         {
@@ -601,32 +670,33 @@ function annotationLine(label, value, color='rgba(183,19,19,.6)') {
     options:{
       responsive:true,
       plugins:{
-        legend:{position:'top', labels:{font:{size:11}}},
+        legend:{position:'top', labels:{font:{size:12}, color:'#BABABA'}},
         annotation:{
           annotations:{
             weekend:{
               type:'box', xMin:4.5, xMax:6.5,
-              backgroundColor:'rgba(72,118,238,.04)', borderColor:'rgba(72,118,238,.15)',
+              backgroundColor:'rgba(100,156,255,.06)', borderColor:'rgba(100,156,255,.15)',
               borderWidth:1, borderDash:[4,4]
             }
           }
         }
       },
       scales:{
-        yDur:{position:'left', min:6.0, max:7.2, ticks:{callback:v=>v.toFixed(1)+'h'},
-              title:{display:true, text:'수면 시간(h)', font:{size:11}}},
+        yDur:{position:'left', min:6.0, max:7.2, ticks:{callback:v=>v.toFixed(1)+'h'}, grid:GRID_OPT,
+              title:{display:true, text:'수면 시간(h)', font:{size:12}}},
+        x:{grid:GRID_OPT},
         yRat:{position:'right', min:6.4, max:7.0, ticks:{callback:v=>v.toFixed(1)},
-              title:{display:true, text:'만족도(10점)', font:{size:11}}, grid:{drawOnChartArea:false}}
+              title:{display:true, text:'만족도(10점)', font:{size:12}}, grid:{drawOnChartArea:false}}
       }
     }
   });
-})();
+});
 
 /* 2-7a. 요일별 취침 시각 */
-(() => {
+registerChart('chartBedtimeByDay', () => {
   const days = ['월', '화', '수', '목', '금', '토', '일'];
   const bedtime = [1.08, 0.97, 0.99, 1.0, 1.02, 1.34, 1.49];
-  const bedColors = bedtime.map((_, i) => i >= 5 ? 'rgba(72,118,238,.7)' : 'rgba(100,100,100,.4)');
+  const bedColors = bedtime.map((_, i) => i >= 5 ? 'rgba(100,156,255,.85)' : 'rgba(122,122,122,.4)');
 
   function hToStr(h) {
     const hh = Math.floor(h);
@@ -652,34 +722,34 @@ function annotationLine(label, value, color='rgba(183,19,19,.6)') {
           annotations: {
             weekend: {
               type: 'box', xMin: 4.5, xMax: 6.5,
-              backgroundColor: 'rgba(72,118,238,.04)', borderColor: 'rgba(72,118,238,.15)',
+              backgroundColor: 'rgba(100,156,255,.06)', borderColor: 'rgba(100,156,255,.15)',
               borderWidth: 1, borderDash: [4, 4]
             },
             avgLine: {
               type: 'line', yMin: 1.10, yMax: 1.10,
-              borderColor: 'rgba(183,19,19,.5)', borderWidth: 1, borderDash: [6, 3],
-              label: { display: true, content: '전체 평균 1:06', position: 'start', backgroundColor: 'rgba(183,19,19,.08)', color: '#B71313', font: { size: 10 } }
+              borderColor: 'rgba(183,19,19,.6)', borderWidth: 1, borderDash: [6, 3],
+              label: { display: true, content: '전체 평균 1:06', position: 'start', backgroundColor: 'rgba(183,19,19,.08)', color: '#B71313', font: { size: 11 } }
             }
           }
         }
       },
       scales: {
         y: {
-          min: 0.5, max: 1.8,
+          min: 0.5, max: 1.8, grid: GRID_OPT,
           ticks: { stepSize: 0.25, callback: function(v) { return hToStr(v); } },
-          title: { display: true, text: '취침 시각', font: { size: 11 } }
+          title: { display: true, text: '취침 시각', font: { size: 12 } }
         },
-        x: { title: { display: true, text: '요일 (기상일 기준)', font: { size: 11 } } }
+        x: { grid: GRID_OPT, title: { display: true, text: '요일 (기상일 기준)', font: { size: 12 } } }
       }
     }
   });
-})();
+});
 
 /* 2-7b. 요일별 기상 시각 */
-(() => {
+registerChart('chartWaketimeByDay', () => {
   const days = ['월', '화', '수', '목', '금', '토', '일'];
   const waketime = [7.53, 7.39, 7.46, 7.42, 7.43, 8.03, 8.23];
-  const wakeColors = waketime.map((_, i) => i >= 5 ? 'rgba(100,156,255,.7)' : 'rgba(100,100,100,.4)');
+  const wakeColors = waketime.map((_, i) => i >= 5 ? 'rgba(100,156,255,.85)' : 'rgba(122,122,122,.4)');
 
   function hToStr(h) {
     const hh = Math.floor(h);
@@ -705,28 +775,31 @@ function annotationLine(label, value, color='rgba(183,19,19,.6)') {
           annotations: {
             weekend: {
               type: 'box', xMin: 4.5, xMax: 6.5,
-              backgroundColor: 'rgba(100,156,255,.04)', borderColor: 'rgba(100,156,255,.15)',
+              backgroundColor: 'rgba(100,156,255,.06)', borderColor: 'rgba(100,156,255,.15)',
               borderWidth: 1, borderDash: [4, 4]
             },
             avgLine: {
               type: 'line', yMin: 7.62, yMax: 7.62,
-              borderColor: 'rgba(183,19,19,.5)', borderWidth: 1, borderDash: [6, 3],
-              label: { display: true, content: '전체 평균 7:37', position: 'start', backgroundColor: 'rgba(183,19,19,.08)', color: '#B71313', font: { size: 10 } }
+              borderColor: 'rgba(183,19,19,.6)', borderWidth: 1, borderDash: [6, 3],
+              label: { display: true, content: '전체 평균 7:37', position: 'start', backgroundColor: 'rgba(183,19,19,.08)', color: '#B71313', font: { size: 11 } }
             }
           }
         }
       },
       scales: {
         y: {
-          min: 7.0, max: 8.5,
+          min: 7.0, max: 8.5, grid: GRID_OPT,
           ticks: { stepSize: 0.25, callback: function(v) { return hToStr(v); } },
-          title: { display: true, text: '기상 시각', font: { size: 11 } }
+          title: { display: true, text: '기상 시각', font: { size: 12 } }
         },
-        x: { title: { display: true, text: '요일 (기상일 기준)', font: { size: 11 } } }
+        x: { grid: GRID_OPT, title: { display: true, text: '요일 (기상일 기준)', font: { size: 12 } } }
       }
     }
   });
-})();
+});
+
+/* Start observing all registered charts */
+chartQueue.observe();
 </script>
 </body>
 </html>
