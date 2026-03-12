@@ -472,23 +472,14 @@ Chart.defaults.font.size = 13;
 Chart.defaults.color = '#7A7A7A';
 const GRID_COLOR = 'rgba(255,255,255,0.15)';
 const GRID_OPT = { color: GRID_COLOR, drawOnChartArea: true, display: true };
-Chart.defaults.animation = { duration: 1200, easing: 'easeOutQuart' };
+Chart.defaults.animation = { duration: 0 };
 
 const chartQueue = [];
 function registerChart(canvasId, createFn) {
   chartQueue.push({ canvasId, createFn, created: false });
 }
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      const item = chartQueue.find(c => c.canvasId === entry.target.id && !c.created);
-      if (item) { item.created = true; item.createFn(); observer.unobserve(entry.target); }
-    }
-  });
-}, { threshold: 0.01 });
 chartQueue.observe = () => chartQueue.forEach(c => {
-  const el = document.getElementById(c.canvasId);
-  if (el) observer.observe(el);
+  if (!c.created) { c.created = true; c.createFn(); }
 });
 
 function annotationLine(label, value, color='rgba(234,57,57,.7)') {
